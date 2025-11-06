@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <br>
     <button type="submit">Kirjaudu</button>
 <br> <br>
-<a href="register.html">
+<a href="register.php">
     <button type="button">Rekisteröidy</button>
 </a>
 </form>
