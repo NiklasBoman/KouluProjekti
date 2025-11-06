@@ -1,0 +1,1 @@
+<!--  Tarkistukset onnistuuko varauksen teko, nämä voi myöhemmin tehdä javascriptillä ja käyttää ajaxia -->

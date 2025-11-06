@@ -1,0 +1,1 @@
+<!-- Näyttää kalenterin mistä valita halutut päviät ja näyttää vapaana olevat luokat valituille päiville -->
