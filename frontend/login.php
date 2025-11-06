@@ -13,7 +13,7 @@
 <body>
 <h1>Kirjautuminen</h1>
 <div class="container">
-<form action="" method="post">
+<form action="index.php" method="post">
     <label>Nimi</label>
     <br>
     <input type="text" name="Nimi" id="Nimi">
