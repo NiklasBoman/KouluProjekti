@@ -1,4 +1,37 @@
 <!-- Kirjautumissivu mikä hashaa salasanan + mut taristukset -->
+<?php 
+session_start();
+include 'db.php';
+
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $gmail = $_POST['gmail'] ?? '';
+    $salasana = $_POST['salasana'] ?? '';
+
+    // Valmistellaan kysely
+    $stmt = $conn->prepare("SELECT JasenID, SalasanaHash FROM Jasen WHERE Gmail = ?");
+    $stmt->bind_param("s", $gmail);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows == 1) {
+        $stmt->bind_result($jasenID, $hash);
+        $stmt->fetch();
+
+        if (password_verify($salasana, $hash)) {
+            $_SESSION['JasenID'] = $jasenID;
+            header("Location: omavuokraus.php");
+            exit;
+        } else {
+            $error = "❌ Väärä salasana.";
+        }
+    } else {
+        $error = "❌ Käyttäjätunnusta ei löytynyt.";
+    }
+    $stmt->close();
+}
+?>
 <!doctype html>
 <html>
 <head>
