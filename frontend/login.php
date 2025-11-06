@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $salasana = $_POST['salasana'] ?? '';
 
     // Valmistellaan kysely
-    $stmt = $conn->prepare("SELECT JasenID, SalasanaHash FROM Jasen WHERE Gmail = ?");
+    $stmt = $conn->prepare("SELECT JasenID, SalasanaHash FROM Kayttajat WHERE Gmail = ?");
     $stmt->bind_param("s", $gmail);
     $stmt->execute();
     $stmt->store_result();
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (password_verify($salasana, $hash)) {
             $_SESSION['JasenID'] = $jasenID;
-            header("Location: omavuokraus.php");
+            header("Location: index.php");
             exit;
         } else {
             $error = "❌ Väärä salasana.";
