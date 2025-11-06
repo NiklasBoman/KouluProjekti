@@ -16,19 +16,19 @@
 <form action="" method="post">
     <label>Nimi</label>
     <br>
-    <input type="text" name="nimi" id="nimi">
+    <input type="text" name="Nimi" id="Nimi">
     <br>
     <label>Sähköposti</label>
     <br>
-    <input type="email" name="gmail" id="gmail">
+    <input type="email" name="Gmail" id="Gmail">
     <br>
     <label>Puhelinnumero</label>
     <br>
-    <input type="number" name="puh" id="puh">
+    <input type="number" name="PuhelinNro" id="PuhelinNro">
     <br>
     <label>Salasana</label>
     <br>
-    <input type="password" name="salasana" id="salasana">
+    <input type="password" name="SalasanaHash" id="SalasanaHash">
     <br>
     <br>
     <button type="submit">Kirjaudu</button>
