@@ -24,10 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: index.php");
             exit;
         } else {
-            $error = "❌ Väärä salasana.";
+            $error = "❌ Väärä salasana.";  //Jos salasana väärin annetaan virhe.
         }
     } else {
-        $error = "❌ Käyttäjätunnusta ei löytynyt.";
+        $error = "❌ Käyttäjätunnusta ei löytynyt."; //Sama juttu jos käyttäjätunnus ei löydy tietokannasta.
     }
     $stmt->close();
 }
