@@ -39,7 +39,7 @@ button {
   box-shadow:0 0 2px #000;
   color: #000;
   font-size: 20px !important;
-
+  background-color: rgba(255, 255, 255, 0.555);
 }
 button:hover {
   color: #2c3e50;
@@ -50,10 +50,14 @@ input[type="email"],
 input[type="password"],
 input[type="text"],
 input[type="number"] {
+ background-color: rgba(255, 255, 255, 0.555);
   width: 100%;
   max-width: 500px;
   padding: 7px;
   font-size: 20px;
   box-shadow: 0 0 10px #000;
-
+}
+a {
+  color: #000000b6 !important;
+  text-shadow: 0 0 4px #000;
 }
