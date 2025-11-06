@@ -1,0 +1,98 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background-color: #f5f6fa;
+    color: #333;
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sivupalkki */
+.sidebar {
+    width: 220px;
+    background-color: #20232a;
+    color: #fff;
+    padding: 1.5rem;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 1rem 0;
+}
+
+.sidebar a {
+    color: #ddd;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    color: #fff;
+}
+
+/* Pääsisältö */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+h1 {
+    margin-bottom: 1rem;
+}
+
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.room-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: 0.2s;
+    position: relative;
+}
+
+.room-card:hover {
+    transform: translateY(-3px);
+}
+
+.room-card.reserved {
+    background: #e0e0e0;
+    color: #777;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    background: #ccc;
+}
+
+.status.available {
+    background: #4caf50;
+    color: #fff;
+}
+
+.status.reserved {
+    background: #f44336;
+    color: #fff;
+}
