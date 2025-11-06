@@ -84,12 +84,13 @@ if (isset($_POST['rekisteroi'])) {
     <button type="submit" >Rekisteröidy</button>
 
 <br><br>
-<a href="login.html">
+<a href="login.php">
     <button type="button">Kirjautumaan</button>
 </a>
 </form>
 </div>
 </body>
 </html>
+
 
 
