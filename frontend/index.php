@@ -1,6 +1,5 @@
 <!-- Näyttää kalenterin mistä valita halutut päviät ja näyttää vapaana olevat luokat valituille päiville -->
 <?php
-// Aloitetaan session ja tuodaan tarvittavat tiedostot, tietokanta sekä apufunktiot
 session_start();
 include '../sql/db.php'; // Korjattu tietokantayhteyden polku
 include "../includes/header_footer/header_frontend.php";
@@ -68,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
             <a href="#" class="nav-link">Varaukset</a>
 
             <!-- TODO tee oma sivu profiilin asetuksille -->
-            <a href="#" class="nav-link">Asetukset</a>
+            <a href="settings.php" class="nav-link">Asetukset</a>
         </div>
     </nav>
 
