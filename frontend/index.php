@@ -4,34 +4,61 @@
 session_start();
 require_once '../includes/db_connect.php';
 require_once '../includes/functions.php';
+include "../includes/header_footer/header_frontend.php";
+
+// Jos käyttäjä ei ole kirjautunut sisään, ohjataan kirjautumissivulle
+/*if (!isset($_SESSION['name']) || empty($_SESSION['name'])) {
+    header('Location: login.php');
+    exit;
+}*/
 ?>
 
-<!DOCTYPE html>
-<html lang="fi">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luokkavaraus järjestelmä</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-</head>
 
 <body>
 
-    <!-- 🔹 Sticky Navbar -->
+    <!-- Sticky Navbar, ei tarvitse olal sticky riippu sivun rakenteesta -->
     <nav class="navbar">
+
+        <!-- Vasen osuus, profiilikuva ja teksti -->
         <div class="nav-left">
-            <img src="../includes/images/profile.jpg" alt="Profiilikuva" class="profile-pic">
-            <span class="user-name">Hei, <?php echo isset($_SESSION['name']) ? htmlspecialchars($_SESSION['name']) : 'Käyttäjä'; ?>!</span>
+
+            <!-- TODO hae käyttäjän kuva tietokannastaja aseta placeholderkuva -->
+            <img src="../includes/images/profile_placeholder.svg" alt="kuva" class="profile-pic">
+
+            <!-- Näyttää kirajutuneen käyttäjän nimen ja kuvan vasemmassa kulmassa navbaria-->
+            <span class="user-name">Hei, <?php echo isset($_SESSION['Nimi']) ? htmlspecialchars($_SESSION['Nimi']) : 'Käyttäjä'; ?>!</span>
         </div>
 
-        <div class="nav-center">
-            <a href="#rooms" class="nav-link active">Luokat</a>
-            <a href="#reservations" class="nav-link">Varaukset</a>
-            <a href="#settings" class="nav-link">Asetukset</a>
+        <!-- Navbarin itemit -->
+        <div class="nav-right">
+            <a href="#" class="nav-link active">Luokat</a>
+            <a href="#" class="nav-link">Varaukset</a>
+
+            <!-- TODO tee oma sivu profiilin asetuksille -->
+            <a href="#" class="nav-link">Asetukset</a>
         </div>
     </nav>
+
+
+
+    <div class="container py-5">
+
+        <!-- Tervetuloa otsikko -->
+        <header class="mb-4">
+            <h1 class="text-center">Tervetuloa luokkavarauksien järjestelmään!</h1>
+            <p class="text-center">Varaa luokkahuone ja hallinoi varauksiasi sivulla.</p>
+        </header>
+
+
+    </div>
+
+
+
+
+
+
+
 
     <!-- Pääsisältö -->
     <main class="content">
@@ -39,6 +66,9 @@ require_once '../includes/functions.php';
             <h1>Varaa luokkahuone</h1>
             <p>Valitse päivämäärä ja näe vapaat huoneet.</p>
             <!-- Varauslomake + huonelistaus tähän -->
+            <div id="roomsGrid" class="rooms-grid" aria-live="polite">
+                <!-- Luokkahuoneet haetaan tänne JavaScriptillä tietokannasta -->
+            </div>
         </section>
 
         <section id="reservations">
@@ -51,6 +81,8 @@ require_once '../includes/functions.php';
             <!-- Käyttäjäasetukset -->
         </section>
     </main>
+
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

@@ -28,6 +28,6 @@ Admin-paneelin kautta ylläpitäjä voi hallita käyttäjiä ja varauksia helpos
 
 ## 👥 Tekijät
 
-1. Niklas 
+1. Niklas Monkkonen https://github.com/NiklasMonkkonen
 2. Niklas Boman https://github.com/NiklasBoman
 3. Santtu Kumpulainen https://github.com/sgee-del
