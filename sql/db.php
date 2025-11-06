@@ -9,4 +9,4 @@ $conn = new mysqli($host, $user, $password, $database);
 if($conn->connect_error){
     die("Yhteys epäonnistui: " . $conn->connect_error);
 }
-?php
+?>
