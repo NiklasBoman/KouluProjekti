@@ -3,9 +3,9 @@ session_start();
 include '../sql/db.php';
 include "../includes/header_footer/header_frontend.php";
 
-
 ?>
 <link rel="stylesheet" href="style.css">
+
 <body>
     <nav class="navbar">
         <div class="nav-left">
@@ -17,10 +17,11 @@ include "../includes/header_footer/header_frontend.php";
             <a href="settings.php" class="nav-link active">Asetukset</a>
         </div>
     </nav>
-    <main class="content">
-        <h1>Asetukset</h1>
-        <p>Tälle sivulle voit lisätä käyttäjäasetusten hallintaan liittyviä toimintoja.</p>
-    </main>
-    
+  <div class="keskitin">
+  <div class="container">
+    <h1>Asetukset</h1>
+    <p>Tälle sivulle voit lisätä käyttäjäasetusten hallintaan liittyviä toimintoja.</p>
+  </div>
+</div>
 </body>
 </html>
