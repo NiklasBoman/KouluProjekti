@@ -1,0 +1,5 @@
+7-11-2025
+
+- Tehtiin projektin dokumentaatio ja suunnitelma.
+- Aloitettiin kehityspäiväkirjan pitäminen.
+- Aloitettiin käyttäjän asetussivun toteutus (HTML/PHP/JS).
