@@ -3,12 +3,9 @@ session_start();
 include '../sql/db.php';
 include "../includes/header_footer/header_frontend.php";
 
-// Jos käyttäjä ei ole kirjautunut sisään, ohjataan kirjautumissivulle
-/*if (!isset($_SESSION['JasenID'])) {
-    header('Location: login.php');
-    exit;
-}*/
+
 ?>
+<link rel="stylesheet" href="style.css">
 <body>
     <nav class="navbar">
         <div class="nav-left">
@@ -24,5 +21,6 @@ include "../includes/header_footer/header_frontend.php";
         <h1>Asetukset</h1>
         <p>Tälle sivulle voit lisätä käyttäjäasetusten hallintaan liittyviä toimintoja.</p>
     </main>
+    
 </body>
 </html>
