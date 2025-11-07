@@ -1,0 +1,29 @@
+1. Johdanto
+
+Projektin tarkoitus on tehdä selainpohjainen toimiva, responsiivinen ja hyvän näköinen luokkavarausjärjestelmä. 
+
+Keskeiset ominaisuudet ovat:
+
+?? Käyttäjän rekisteröinti ja kirjautuminen
+??? Luokkahuoneiden haku ja varaaminen
+?? Varausten hallinta
+?? Admin-paneeli ylläpitäjälle.
+
+
+
+2. Päätökset ja tekniset valinnat
+Frontend (HTML/CSS/JS): Selkeä, kevyt ja laajasti tuettu selainpohjainen toteutus. Responsiivisuus toteutetaan CSS:llä ja bootstrapilla. 
+
+Backend (PHP): Valittu helpon web-integraation, laajan hosting-tuen ja nopean kehityksen vuoksi
+
+Tietokanta (MySQL): Laajasti saatavilla, hyvä suorituskyky luku/kirjoitusskenaarioissa ja tuttu työkalu tiimille. 
+
+Kehitysympäristö (XAMPP) Tarjoaa valmiin paketin (Apache, PHP, MySQL) ja helpottaa paikallista kehitystä.
+
+3. Liitteet
+
+Alla oleva kaavio kuvaa tietokannan rakenteen ja keskeiset taulut:
+
+   Kayttajat– käyttäjät, joilla on tunnukset ja roolit
+   Huoneet– varattavat luokat/tilat
+       Varaukset – varaukset, jotka yhdistävät käyttäjän ja luokan
