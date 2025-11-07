@@ -1,0 +1,28 @@
+Suunnitelma
+Luokkavarausjärjestelmä
+Projektin jäsenet:
+Niklas Boman 
+Niklas Mönkkönen 
+Santtu Kumpulainen
+Oppimistavoitteet:
+- Tutustua tiimiin ja rooleihin
+- Sopia viestintäkäytännöistä
+- Täyttää dokumenttimallia
+Osallistujat: 
+  lyhyesti:
+- Roolinsa projektissa
+- Osaamisalueensa
+- Odotukset ja toiveet projektista
+Aikataulu:
+6.11.2025 – 14.11.2025
+Tehtävät:
+- DB-Suunnittelu
+- Frontend
+- Backend
+- Testaus
+
+Hyväksymiskriteerit:
+- MVP toimi
+- Testit läpäisty
+- Dokumentaatio valmis
+
