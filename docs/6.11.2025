@@ -1,0 +1,7 @@
+6-11-2025
+
+- Aloitimme projektin (luokkavarausjärjestelmä).
+- Loimme MySQL-tietokannan ja määrittelimme perustaulut (Kayttajat, Huoneet, Varaukset).
+- Toteutimme pääsivun sekä kirjautumis- ja rekisteröintisivut (HTML/PHP).
+- Lisäsimme README:n GitHubiin ja loimme tarvittavat kansiorakenteet.
+- Testasimme rekisteröinnin ja kirjautumisen toimivuutta (peruskäyttäjätili).
