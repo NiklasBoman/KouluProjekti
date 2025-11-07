@@ -1,29 +1,31 @@
 1. Johdanto
 
-Projektin tarkoitus on tehdä selainpohjainen toimiva, responsiivinen ja hyvän näköinen luokkavarausjärjestelmä. 
+Projektin tarkoitus on tehdÃ¤ selainpohjainen toimiva, responsiivinen ja hyvÃ¤n nÃ¤kÃ¶inen luokkavarausjÃ¤rjestelmÃ¤. 
 
 Keskeiset ominaisuudet ovat:
 
-?? Käyttäjän rekisteröinti ja kirjautuminen
-??? Luokkahuoneiden haku ja varaaminen
-?? Varausten hallinta
-?? Admin-paneeli ylläpitäjälle.
+KÃ¤yttÃ¤jÃ¤n rekisterÃ¶inti ja kirjautuminen
+Luokkahuoneiden haku ja varaaminen
+Varausten hallinta
+Admin-paneeli yllÃ¤pitÃ¤jÃ¤lle.
 
 
 
-2. Päätökset ja tekniset valinnat
-Frontend (HTML/CSS/JS): Selkeä, kevyt ja laajasti tuettu selainpohjainen toteutus. Responsiivisuus toteutetaan CSS:llä ja bootstrapilla. 
+2. PÃ¤Ã¤tÃ¶kset ja tekniset valinnat
+Frontend (HTML/CSS/JS): SelkeÃ¤, kevyt ja laajasti tuettu selainpohjainen toteutus. Responsiivisuus toteutetaan CSS:llÃ¤ ja bootstrapilla. 
 
 Backend (PHP): Valittu helpon web-integraation, laajan hosting-tuen ja nopean kehityksen vuoksi
 
-Tietokanta (MySQL): Laajasti saatavilla, hyvä suorituskyky luku/kirjoitusskenaarioissa ja tuttu työkalu tiimille. 
+Tietokanta (MySQL): Laajasti saatavilla, hyvÃ¤ suorituskyky luku/kirjoitusskenaarioissa ja tuttu tyÃ¶kalu tiimille. 
 
-Kehitysympäristö (XAMPP) Tarjoaa valmiin paketin (Apache, PHP, MySQL) ja helpottaa paikallista kehitystä.
+KehitysympÃ¤ristÃ¶ (XAMPP) Tarjoaa valmiin paketin (Apache, PHP, MySQL) ja helpottaa paikallista kehitystÃ¤.
 
 3. Liitteet
 
 Alla oleva kaavio kuvaa tietokannan rakenteen ja keskeiset taulut:
 
-   Kayttajat– käyttäjät, joilla on tunnukset ja roolit
-   Huoneet– varattavat luokat/tilat
-       Varaukset – varaukset, jotka yhdistävät käyttäjän ja luokan
+   Kayttajatâ€“ kÃ¤yttÃ¤jÃ¤t, joilla on tunnukset ja roolit
+   Huoneetâ€“ varattavat luokat/tilat
+   Varaukset â€“ varaukset, jotka yhdistÃ¤vÃ¤t kÃ¤yttÃ¤jÃ¤n ja luokan
+
+
