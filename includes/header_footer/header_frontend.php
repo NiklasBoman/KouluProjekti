@@ -37,7 +37,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <a href="index.php" class="nav-link <?php if ($current_page == 'index.php') echo 'active'; ?>">Luokat</a>
             <a href="index.php#reservations" class="nav-link">Varaukseni</a>
             <a href="settings.php" class="nav-link <?php if ($current_page == 'settings.php') echo 'active'; ?>">Asetukset</a>
-            <a href="logout.php" class="nav-link btn btn-outline-danger btn-sm">Kirjaudu ulos</a>
+            <a href="logout.php" class="nav-link log-out">Kirjaudu ulos</a>
         </div>
     </nav>
 </header>

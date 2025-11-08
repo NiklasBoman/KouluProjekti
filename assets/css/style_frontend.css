@@ -61,6 +61,7 @@ body {
     gap: 1.5rem; /* Pidetään linkkien väli selkeänä */
 }
 
+/* Navbar linkkien väriasetukset ja efektit */
 .nav-link {
     color: #444;
     text-decoration: none;
@@ -78,6 +79,15 @@ body {
     color: #007bff;
 }
 
+/* Logout button */
+.nav-link.log-out {
+    color: #444; /* Oletusväri sama kuin muilla linkeillä */
+}
+
+.nav-link.log-out:hover {
+    color: #d9534f; /* Punainen väri hover-tilassa */
+}
+
 /* Pääsisällön wrapper mikä keskittää elementit ja määrää max leveyden */
 .main-content {
     max-width: 1200px;
@@ -90,6 +100,11 @@ body {
     text-align: center;
     padding: 2rem 0; 
     margin-bottom: 2rem; 
+}
+
+/* Yleinen container-luokka sisällön osioille */
+.content-section {
+    margin-bottom: 2rem; /* Lisää tilaa osioiden väliin */
 }
 
 .header h1 {
@@ -107,7 +122,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 1rem;
+    max-width: 900px; /* Kapeampi leveys valinnalle */
+    margin: 0 auto 2rem auto; 
     margin-bottom: 2rem;
 }
 
@@ -162,9 +179,14 @@ body {
     margin-top: 10px;
 }
 
-/* Vapaat huoneet */
-.available-rooms {
-    max-width: 900px;
+
+
+h2.class-rooms-title {
+    text-align: left;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem; /* Lisätään hieman enemmän tilaa */
+    color: #333;
+    padding-left: 10px; /* Pieni sisennys, jotta ei ole kiinni reunassa */
 }
 
 /* gridi missä näytetään vapaana olevat huoneet */

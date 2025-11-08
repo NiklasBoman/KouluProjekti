@@ -61,55 +61,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
         <p>Valitse haluamasi aikaväli ja varaa vapaa luokkahuone.</p>
     </header>
 
-    <!-- Valitut päivämäärät -->
-    <div class="date-selection">
-        <form action="index.php" method="post" class="date-form">
-            <div class="form-group">
-                <label for="start_date">Alkupäivämäärä:</label>
-                <input type="date" name="start_date" id="start_date" required value="<?php echo htmlspecialchars($start_date); ?>">
-            </div>
-            <div class="form-group">
-                <label for="end_date">Loppupäivämäärä:</label>
-                <input type="date" name="end_date" id="end_date" required value="<?php echo htmlspecialchars($end_date); ?>">
-            </div>
-            <div class="form-group">
-                <button type="submit">Hae vapaat huoneet</button>
-            </div>
-        </form>
-        
-        <?php if ($start_date && $end_date): ?>
-            <div class="selected-dates">
-                <p>Valitut päivämäärät: <?php echo htmlspecialchars($start_date); ?> - <?php echo htmlspecialchars($end_date); ?></p>
-            </div>
-        <?php endif; ?>
-        
-        <?php if ($error_message): ?>
-            <div class="error-message"><?php echo $error_message; ?></div>
-        <?php endif; ?>
+    <!-- Päivämäärän valinnan container -->
+    <div class="content-section">
+        <div class="date-selection">
+            <form action="index.php" method="post" class="date-form">
+                <div class="form-group">
+                    <label for="start_date">Alkupäivämäärä:</label>
+                    <input type="date" name="start_date" id="start_date" required value="<?php echo htmlspecialchars($start_date); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="end_date">Loppupäivämäärä:</label>
+                    <input type="date" name="end_date" id="end_date" required value="<?php echo htmlspecialchars($end_date); ?>">
+                </div>
+                <div class="form-group">
+                    <button type="submit">Hae vapaat huoneet</button>
+                </div>
+            </form>
+            
+            <?php if ($start_date && $end_date): ?>
+                <div class="selected-dates">
+                    <p>Valitut päivämäärät: <?php echo htmlspecialchars($start_date); ?> - <?php echo htmlspecialchars($end_date); ?></p>
+                </div>
+            <?php endif; ?>
+            
+            <?php if ($error_message): ?>
+                <div class="error-message"><?php echo $error_message; ?></div>
+            <?php endif; ?>
+        </div>
     </div>
 
-    <!-- Vapaiden huoneiden tulokset -->
-    <section class="available-rooms">
-        <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error_message)): ?>
-            <h2>Vapaat luokat:</h2>
-            
-            <?php if (!empty($available_rooms)): ?>
-                <div class="rooms-list">
-                    <?php foreach ($available_rooms as $room): ?>
-                        <div class="room-item">
-                            <h3><?php echo htmlspecialchars($room['HuoneNimi']); ?></h3>
-                            <p><?php echo htmlspecialchars($room['Rakennus']); ?>, kerros <?php echo htmlspecialchars($room['Kerros']); ?></p>
-                            <p>Huoneen numero: <?php echo intval(substr($room['HuoneNimi'], -2)); ?></p>
-                            <p>Paikkoja: <?php echo htmlspecialchars($room['Paikat']); ?></p>
-                            <a href="reserve.php?huone_id=<?php echo $room['HuoneID']; ?>&alku=<?php echo $start_date; ?>&loppu=<?php echo $end_date; ?>" class="reserve-btn">Varaa</a>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php else: ?>
-                <div class="no-rooms-message">Ei vapaita huoneita tällä aikavälillä.</div>
+    <!-- Vapaiden huoneiden tulosten container -->
+    <div class="content-section">
+        <section class="available-rooms">
+            <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error_message)): ?>
+                <h2 class="class-rooms-title">Vapaat luokat:</h2>
+                
+                <?php if (!empty($available_rooms)): ?>
+                    <div class="rooms-list">
+                        <?php foreach ($available_rooms as $room): ?>
+                            <div class="room-item">
+                                <h3><?php echo htmlspecialchars($room['HuoneNimi']); ?></h3>
+                                <p><?php echo htmlspecialchars($room['Rakennus']); ?>, kerros <?php echo htmlspecialchars($room['Kerros']); ?></p>
+                                <p>Huoneen numero: <?php echo intval(substr($room['HuoneNimi'], -2)); ?></p>
+                                <p>Paikkoja: <?php echo htmlspecialchars($room['Paikat']); ?></p>
+                                <a href="reserve.php?huone_id=<?php echo $room['HuoneID']; ?>&alku=<?php echo $start_date; ?>&loppu=<?php echo $end_date; ?>" class="reserve-btn">Varaa</a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <div class="no-rooms-message">Ei vapaita huoneita tällä aikavälillä.</div>
+                <?php endif; ?>
             <?php endif; ?>
-        <?php endif; ?>
-    </section>
+        </section>
+    </div>
 </div>
 
 <script src="../assets/js/main.js"></script>
