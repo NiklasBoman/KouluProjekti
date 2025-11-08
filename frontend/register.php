@@ -1,12 +1,12 @@
 <?php
-include 'db.php';
+include '../sql/db.php';
 
 if (isset($_POST['rekisteroi'])) {
     // Lomakkeen tiedot
     $nimi = trim($_POST['Nimi']);
     $gmail = trim($_POST['Gmail']);
     $puhelinNro = trim($_POST['PuhelinNro']);
-    $salasana = $_POST['SalasanaHash'];
+    $salasana = $_POST['salasana'];
 
     $virheet = [];
 
@@ -23,7 +23,7 @@ if (isset($_POST['rekisteroi'])) {
     if (!preg_match("/^\d+$/", $puhelinNro)) {
         $virheet[] = "Puhelinnumero ei ole kelvollinen.";
     }
-    $stmt_check = $conn->prepare("SELECT JasenID FROM Jasen WHERE Gmail = ?");
+    $stmt_check = $conn->prepare("SELECT KayttajaID FROM Kayttajat WHERE Gmail = ?");
     $stmt_check->bind_param("s", $gmail);
     $stmt_check->execute();
     $stmt_check->store_result();
@@ -35,7 +35,7 @@ if (isset($_POST['rekisteroi'])) {
         $hash = password_hash($salasana, PASSWORD_DEFAULT); //Salaa salasanan
 
         //Jos ei virheitä käyttäjätiedot luodaan ja tallenetaan tietokantaan.
-        $stmt = $conn->prepare("INSERT INTO Jasen (Nimi, Gmail, PuhelinNro, SalasanaHash) VALUES (?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO Kayttajat (Nimi, Gmail, PuhelinNro, SalasanaHash) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $nimi, $gmail, $puhelinNro, $hash);
         if ($stmt->execute()) {
             echo "<div class='message success'>✅ Rekisteröinti onnistui!</div>";
@@ -78,10 +78,10 @@ if (isset($_POST['rekisteroi'])) {
     <br>
     <label>Salasana</label>
     <br>
-    <input type="password" name="SalasanaHash" id="SalasanaHash">
+    <input type="password" name="salasana" id="salasana">
     <br>
     <br>
-    <button type="submit" >Rekisteröidy</button>
+    <button type="submit" name="rekisteroi">Rekisteröidy</button>
 
 <br><br>
 <a href="login.php">
@@ -91,6 +91,3 @@ if (isset($_POST['rekisteroi'])) {
 </div>
 </body>
 </html>
-
-
-

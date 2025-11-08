@@ -1,7 +1,7 @@
 <!-- Kirjautumissivu mikä hashaa salasanan + mut taristukset -->
 <?php 
 session_start();
-include 'db.php';
+include '../sql/db.php';
 
 $error = "";
 
@@ -10,17 +10,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $salasana = $_POST['salasana'] ?? '';
 
     // Valmistellaan kysely
-    $stmt = $conn->prepare("SELECT JasenID, SalasanaHash FROM Kayttajat WHERE Gmail = ?");
+    $stmt = $conn->prepare("SELECT KayttajaID, Nimi, SalasanaHash FROM Kayttajat WHERE Gmail = ?");
     $stmt->bind_param("s", $gmail);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows == 1) {
-        $stmt->bind_result($jasenID, $hash);
+        // Määritellään muuttujat ennen bind_result-kutsua
+        $kayttajaID = null; $nimi = null; $hash = null;
+
+        $stmt->bind_result($kayttajaID, $nimi, $hash);
         $stmt->fetch();
 
         if (password_verify($salasana, $hash)) {
-            $_SESSION['JasenID'] = $jasenID;
+            $_SESSION['KayttajaID'] = $kayttajaID;
+            $_SESSION['Nimi'] = $nimi;
             header("Location: index.php");
             exit;
         } else {
@@ -46,22 +50,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <h1>Kirjautuminen</h1>
 <div class="container">
-<form action="index.php" method="post">
-    <label>Nimi</label>
-    <br>
-    <input type="text" name="Nimi" id="Nimi">
-    <br>
+<form action="login.php" method="post">
+    <?php if (!empty($error)): ?>
+        <div class="alert alert-danger"><?php echo $error; ?></div>
+    <?php endif; ?>
     <label>Sähköposti</label>
     <br>
-    <input type="email" name="Gmail" id="Gmail">
-    <br>
-    <label>Puhelinnumero</label>
-    <br>
-    <input type="number" name="PuhelinNro" id="PuhelinNro">
+    <input type="email" name="gmail" id="gmail" required>
     <br>
     <label>Salasana</label>
     <br>
-    <input type="password" name="SalasanaHash" id="SalasanaHash">
+    <input type="password" name="salasana" id="salasana" required>
     <br>
     <br>
     <button type="submit">Kirjaudu</button>

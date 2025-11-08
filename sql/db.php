@@ -1,12 +1,16 @@
 <?php
-$host = "localhost";
-$user = "213572";
-$password = "G96XnfMp7rci9UAA";
-$database = "213572";
+// Haetaan config.php:n sisältö ja asetustiedosto
+// __DIR__ -vakiolla polku on aina oikea riippumatta mistä tiedostoa kutsutaan
+require_once __DIR__ . '/../includes/config.php';
 
-$conn = new mysqli($host, $user, $password, $database);
+// Luodaan tietokantayhteys käyttäen config.php:n vakioita
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-if($conn->connect_error){
+// Tarkistetaan yhteys
+if ($conn->connect_error) {
     die("Yhteys epäonnistui: " . $conn->connect_error);
 }
+
+// Asetetaan utf8mb4 charset
+$conn->set_charset("utf8mb4");
 ?>

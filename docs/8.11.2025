@@ -1,0 +1,73 @@
+- javascript apufunktio hamburger menulle sekä index.php sivun responsiivisuus tehty
+- index.php näkyy nyt vain kirjautuneille käyttäjille ja uloskirjautuminen toimii, tuhoaa sessionit yms
+- Luokkahuone haku toimii, voit hakea luokkia halutuille päiville kalenterista ja se näyttää gridissä 
+vapaaana olevat huoneet tietokannasta 
+- Tein pieniä muutoksia esim. login sivulle että se kysyy nyt vain käyttäjän spostin ja salasanan
+- salasana on nyt hashattu tietokantaan tietoturva syistä
+
+--- testikäyttäjä topi@example.com  salasana: 1234 ---
+
+--- Muunsin myös tietokanta asetuksia niin että ne haetaan db.php tiedostosta jossa asetukset voi määritellä ---
+--- Muunsin asetukset localiksi että voi tehdä kotonakin phpmyadmin tietokannasta ---
+
+
+<?php
+$host = "localhost";
+$user = "213572";
+$password = "G96XnfMp7rci9UAA";
+$database = "213572";
+
+$conn = new mysqli($host, $user, $password, $database);
+
+if($conn->connect_error){
+    die("Yhteys epäonnistui: " . $conn->connect_error);
+}
+?>
+
+/sql/db.php <-- Muokkaa tähän tiesotoon yllä oleva koodi niin toimii taas koulun palvelimelta
+
+Lisään tietokannan missä testikäyttäjä ja luokkahuoneita testausta varten kansion rootiin.
+
+\KouluProjekti-1\sql\kouluDatabase.sql <--- Tässä uusi sql query missä testikäyttäjä ja huoneet
+(vanha on tallessa nimellä kouluDatabase1.sql)
+
+Jos jaksan niin muutan vielä tänään kansiorakenteen ja vaihdan polut joka tiedostoon.. 
+Nykyinen on ihan perseestä koska siinä on sekaisin public frontend ja backend toiminnallisuudet
+ kuten register, login, reservre handlerit
+
+ KouluProjekti-1/
+├── public/                  <-- AINOA kansio, jonka Apache-palvelin näyttää ulospäin
+│   ├── index.php            <-- Pääsivun "reititin" 
+│   ├── login.php            <-- Kirjautumissivu
+│   ├── register.php         <-- Rekisteröintisivu
+│   ├── settings.php         <-- Käyttäjän asetukset
+│   └── assets/
+│       ├── css/
+│       │   └── style_frontend.css      <-- Frontendin CSS
+│       ├── js/
+│       │   └── main.js
+│       └── images/
+│           └── profile_placeholder.svg
+│
+├── src/                     <-- Kaikki serveri puolen slogiikka, EI julkisesti saatavilla
+│   ├── config.php           <-- Tietokannan tunnukset yms.
+│   ├── db.php               <-- Tietokantayhteys
+│   ├── functions.php        <-- Yleiset apufunktiot
+│   │
+│   ├── actions/             <-- Käsittelee lomakkeiden lähetykset
+│   │   ├── handle_login.php
+│   │   ├── handle_register.php
+│   │   └── logout.php       
+│   │
+│   └── templates/           <-- Uudelleenkäytettävät include tiedostot (älä poista enää :D)
+│       ├── header.php
+│       └── footer.php
+│
+├── sql/                     <-- Tietokanta
+│   └── KouluDatabase.sql
+│
+├── Dokumentaatio.txt
+└── README.md
+
+
+- Santtu
