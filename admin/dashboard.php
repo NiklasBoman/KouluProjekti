@@ -1,1 +1,1 @@
-<!-- Näyttää varatut huoneet ja päivämäärät sekä varaajn tiedot -->
+<!-- Hallintapaneeli -->

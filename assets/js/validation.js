@@ -1,1 +1,0 @@
-// Validation funktio lomakkeille kuten varaukset yms

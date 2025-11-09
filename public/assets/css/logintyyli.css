@@ -1,0 +1,73 @@
+body {
+  font-family: sans-serif; /* Selkeä ja moderni fontti */
+  height: 100vh; /* Koko näkymän korkeus käytössä */
+  display: flex; /* Flexbox-asettelu mahdollistaa keskittämisen */
+  justify-content: center; /* Keskittää sisällön vaakasuunnassa */
+  align-items: center; /* Keskittää sisällön pystysuunnassa */
+  background: linear-gradient(to left, #647FBC, #AED6CF, #FAFDD6); /* Liukuvärjätty tausta vasemmalta oikealle */
+  flex-direction: column; /* Elementit pinotaan pystysuunnassa */
+}
+
+/* Sisältölaatikko keskellä sivua */
+.container {
+  background-color: rgba(255, 255, 255, 0.322); /* Vaalea läpinäkyvä tausta */
+  border-radius: 30px; /* Pyöristetyt kulmat */
+  box-shadow: 0 0 20px #000; /* Tumma varjo ympärillä */
+  display: flex; /* Flexbox-asettelu */
+  flex-direction: column; /* Sisältö pystysuunnassa */
+  padding: 50px 40px 55px 40px; /* Tilaa sisällön ympärille */
+  align-items: center; /* Keskittää sisällön vaakasuunnassa */
+  max-width: 600px; /* Maksimileveys */
+  width: 100%; /* Skaalautuu täyteen leveyteen */
+  text-align: center; /* Teksti keskitetään */
+}
+
+/* Otsikko */
+h1 {
+  margin-top: 20px;
+  text-shadow: 0 0 3px #000; /* Hieman varjoa tekstille */
+}
+
+/* Kenttien otsikot */
+label {
+  font-size: 20px;
+  text-shadow: 0 0 2px #000;
+}
+
+/* Painikkeen ulkoasu */
+button {
+  border-radius: 15px; /* Pyöristetyt kulmat */
+  cursor: pointer; /* Osoitin muuttuu klikattavaksi */
+  width: 100%; /* Täysi leveys */
+  padding: 16px;
+  font-size: 20px;
+  background-color: rgba(255, 255, 255, 0.555); /* Vaalea tausta */
+  text-shadow: 0 0 4px #000;
+  box-shadow: 0 0 2px #000;
+}
+
+/* Hover-efekti painikkeelle */
+button:hover {
+  color: #2c3e50; /* Väri muuttuu tummemmaksi */
+  transform: scale(1.05); /* Painike suurenee hieman */
+  border: 2px solid; /* Reuna korostuu */
+}
+
+/* Syötekenttien tyylit */
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="number"] {
+  background-color: rgba(255, 255, 255, 0.555);
+  width: 100%;
+  max-width: 500px;
+  padding: 7px;
+  font-size: 20px;
+  box-shadow: 0 0 10px #000;
+}
+
+/* Linkkien ulkoasu */
+a {
+  color: #000000b6 !important;
+  text-shadow: 0 0 4px #000;
+}

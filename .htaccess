@@ -1,0 +1,12 @@
+# Estä suora pääsy näihin kansioihin ja tiedostoihin
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule ^(includes|sql|vendor|config|\.env).* - [F,L]
+</IfModule>
+
+# Varmuuden vuoksi estetään vielä suorat pyynnöt
+<FilesMatch "(\.env|config\.php|composer\.json|composer\.lock)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

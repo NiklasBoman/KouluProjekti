@@ -28,10 +28,6 @@ CREATE TABLE Varaukset (
 );
 
 
-
-
-
-
 -- testidatan lisäys
 -- Lisää käyttäjä "Topi" (salasana 1234)
 INSERT INTO Kayttajat (Nimi, Gmail, SalasanaHash, PuhelinNro)

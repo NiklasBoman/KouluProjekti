@@ -1,0 +1,73 @@
+- Muokattu kansiorakenne ja lisätty testidata tietokantaan.
+- Lisätty .gitignore, .env ja .env.example tiedostot
+- Siirretty tietokantaasetukset .env tiedostoon niin ne ei ole julkisesti saatavilla
+Tee oma .env tiedosto .env.example tiedoston mukaan ja lisää siihen palvelimen tunnukset
+tai käytä localia.
+- Yhdistetty db.php ja db_connection.php tiedostot yhteen (Ei muutosta toimintaan)
+- Poistettu duplicate tiedostot
+
+Kouluprojekti/
+│
+├── public/                        # Julkiset tiedostot (nämä palvelin näyttää)
+│   ├── index.php                  # Ulosohjaa frontend/index.php:lle
+│   ├── assets/
+│   │   ├── css/
+│   │   │   ├── style_frontend.css
+│   │   │   ├── admin.css
+│   │   │   └── logintyyli.css
+│   │   │   └── style.css
+│   │   ├── js/
+│   │   │   └── main.js
+│   │   └── images/
+│   │       └── profile_placeholder.svg
+│   └── favicon.ico                # Lisää favicon
+│
+├── frontend/                      # Käyttäjälle näkyvät sivut
+│   ├── index.php                  # Päänäkymä (varaukset)
+│   ├── login.php
+│   ├── logout.php
+│   ├── register.php
+│   ├── reserve.php
+│   ├── settings.php
+│   ├── success.php
+│   └── header_frontend.php
+│
+│
+├── includes/                      # Yhteiset tiedostot
+│   ├── config.php                 # Lataa .env ja määrittelee tietokannan asetukset
+│   ├── db_connect.php             # Luo mysqli tai PDO-yhteyden
+│   ├── functions.php              # Yleiset funktiot
+│   └── footer.php
+│
+|
+│
+├── .env  						# Ympäristömuuttujat (db-yhteys jne) gitignoressa
+└── .env.example               # Pohja mistä tehdä .env teidosto
+├── .gitignore                     
+└── README.md
+└── .htaccess
+└── docs				        # Dokumentointi kansio
+
+HUOM yritin uudelleenreitittää kaiken mutta jotain jäi ehkä näkemättä niin jos joku ei toimi tarkista reititykset!
+
+Lisäsin login sivulle turvallisemmat evästeasetukset joita voi käyttää jokasivulla ennen session aloitusta
+
+
+
+// Turvallisemmat sessioasetukset
+session_set_cookie_params([
+    'lifetime' => 0,          // Istunto päättyy, kun selain suljetaan
+    'path' => '/',            // Saatavilla kaikilla poluilla
+    'domain' => '',           // Automaattisesti nykyinen domain
+    'secure' => isset($_SERVER['HTTPS']), // Käytä vain HTTPS:ää, jos saatavilla
+    'httponly' => true,       // Evästettä ei voi lukea JavaScriptillä
+    'samesite' => 'Strict'    // Estää CSRF- ja cross-site -hyökkäykset
+]);
+
+session_start();
+include '../includes/db_connect.php'; // Yhteys tietokantaan
+
+
+-logout.php valmis
+- Lisätty julkinen .htaccess tiedosto mikä estää pääsyn selaimen kautta muihin kuin tarvittaviin tiedostoihin
+- Lisätty juurihakemioston .htaccess

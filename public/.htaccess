@@ -1,0 +1,16 @@
+# Julkinen .htaccess tiedosto
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /kouluvaraus/public/
+
+    # Estetään pääsy suoraan .env, .htaccess jne.
+    RewriteRule ^(\.env|\.htaccess)$ - [F,L]
+
+    # Jos tiedosto tai hakemisto ei ole olemassa, ohjataan index.php:lle
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Varmistetaan UTF-8
+AddDefaultCharset utf-8

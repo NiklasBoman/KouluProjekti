@@ -1,1 +1,0 @@
-<!-- Voit päivittää ja muokata varauksia -->

@@ -35,39 +35,7 @@ Jos jaksan niin muutan vielä tänään kansiorakenteen ja vaihdan polut joka ti
 Nykyinen on ihan perseestä koska siinä on sekaisin public frontend ja backend toiminnallisuudet
  kuten register, login, reservre handlerit
 
- KouluProjekti-1/
-├── public/                  <-- AINOA kansio, jonka Apache-palvelin näyttää ulospäin
-│   ├── index.php            <-- Pääsivun "reititin" 
-│   ├── login.php            <-- Kirjautumissivu
-│   ├── register.php         <-- Rekisteröintisivu
-│   ├── settings.php         <-- Käyttäjän asetukset
-│   └── assets/
-│       ├── css/
-│       │   └── style_frontend.css      <-- Frontendin CSS
-│       ├── js/
-│       │   └── main.js
-│       └── images/
-│           └── profile_placeholder.svg
-│
-├── src/                     <-- Kaikki serveri puolen slogiikka, EI julkisesti saatavilla
-│   ├── config.php           <-- Tietokannan tunnukset yms.
-│   ├── db.php               <-- Tietokantayhteys
-│   ├── functions.php        <-- Yleiset apufunktiot
-│   │
-│   ├── actions/             <-- Käsittelee lomakkeiden lähetykset
-│   │   ├── handle_login.php
-│   │   ├── handle_register.php
-│   │   └── logout.php       
-│   │
-│   └── templates/           <-- Uudelleenkäytettävät include tiedostot (älä poista enää :D)
-│       ├── header.php
-│       └── footer.php
-│
-├── sql/                     <-- Tietokanta
-│   └── KouluDatabase.sql
-│
-├── Dokumentaatio.txt
-└── README.md
+
 
 
 - Santtu

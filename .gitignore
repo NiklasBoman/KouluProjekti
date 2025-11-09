@@ -1,0 +1,6 @@
+# env tiedostot
+.env
+
+# Backups
+*.bak
+*.tmp

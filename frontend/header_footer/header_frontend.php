@@ -6,7 +6,7 @@
     <title>Luokkavaraus järjestelmä</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/style_frontend.css">
+    <link rel="stylesheet" href="../public/assets/css/style_frontend.css">
 </head>
 <body>
     
@@ -22,7 +22,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <!-- Vasen osuus, profiilikuva ja teksti -->
         <div class="nav-left">
             <!-- TODO hae käyttäjän kuva tietokannasta ja aseta placeholderkuva -->
-            <img src="../includes/images/profile_placeholder.svg" alt="Kuva" class="profile-pic">
+            <img src="../public/assets/images/profile_placeholder.svg" alt="Kuva" class="profile-pic">
              <!-- Näyttää kirajutuneen käyttäjän nimen ja kuvan vasemmassa kulmassa navbaria-->
             <span class="user-name">Hei, <?php echo isset($_SESSION['Nimi']) ? htmlspecialchars($_SESSION['Nimi']) : 'Käyttäjä'; ?>!</span>
         </div>

@@ -1,7 +1,17 @@
-<!-- Kirjautumissivu mikä hashaa salasanan + mut taristukset -->
 <?php 
+
+// Turvallisemmat sessioasetukset
+session_set_cookie_params([
+    'lifetime' => 0,          // Istunto päättyy, kun selain suljetaan
+    'path' => '/',            // Saatavilla kaikilla poluilla
+    'domain' => '',           // Automaattisesti nykyinen domain
+    'secure' => isset($_SERVER['HTTPS']), // Käytä vain HTTPS:ää, jos saatavilla
+    'httponly' => true,       // Evästettä ei voi lukea JavaScriptillä
+    'samesite' => 'Strict'    // Estää CSRF- ja cross-site -hyökkäykset
+]);
+
 session_start();
-include '../sql/db.php';
+include '../includes/db_connect.php'; // Yhteys tietokantaan
 
 $error = "";
 

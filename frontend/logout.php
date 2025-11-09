@@ -1,13 +1,32 @@
 <?php
-// Aloitetaan sessio, jotta voidaan käsitellä sessiomuuttujia.
-session_start();
+// Aloitetaan sessio, jos ei ole vielä käynnissä
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Tyhjennetään kaikki sessiomuuttujat.
-$_SESSION = array();
+// Tyhjennetään kaikki sessiomuuttujat
+$_SESSION = [];
 
-// Tuhotaan sessio.
+// Tarkistetaan, onko sessioncookies käytössä ja tuhotetaan ne
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+
+    // setcookie-funktiolla asetetaan evästeen vanhentumaan
+    setcookie(
+        session_name(),
+        '',
+        time() - 42000,
+        $params["path"],
+        $params["domain"],
+        $params["secure"],
+        $params["httponly"]
+    );
+}
+
+// Lopetetaan sessio kokonaan
 session_destroy();
 
-// Ohjataan käyttäjä takaisin kirjautumissivulle.
-header("Location: login.php");
+// Ohjataan käyttäjä kirjautumissivulle
+header("Location: login.php", true, 303);
 exit;
+?>
