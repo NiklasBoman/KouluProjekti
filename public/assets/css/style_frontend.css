@@ -19,6 +19,30 @@ body {
     border-bottom: 2px solid #f1f1f1; 
 }
 
+/* Hero-section asetukset */
+.hero-section {
+    height: 400px; 
+    min-width: 900px; /* Muokkaa leveys responsiiviseksi ja sopivaksi ja korkeus myös */
+    background-image: url('../images/hero_image.jpg'); 
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 80px rgba(0, 86, 179, 0.5); /* Varjo efekti kuvalle */
+}
+
+/* Hero imagen päälle tuleva teksti */
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
 /* Hamburgermenu pienillä näytöillä */
 .hamburger {
     display: none; 
@@ -86,20 +110,6 @@ body {
 
 .nav-link.log-out:hover {
     color: #d9534f; /* Punainen väri hover-tilassa */
-}
-
-/* Hero-section asetukset */
-.hero-section {
-    height: 400px; 
-    min-width: 900px; /* Muokkaa leveys responsiiviseksi ja sopivaksi ja korkeus myös */
-    background-image: url('../images/hero_image.jpg'); 
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 0 80px rgba(0, 86, 179, 0.5); /* Varjo efekti kuvalle */
 }
 
 /* Pääsisällön wrapper mikä keskittää elementit ja määrää max leveyden */
