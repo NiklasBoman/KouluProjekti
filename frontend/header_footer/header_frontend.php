@@ -35,7 +35,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <!-- Oikea osuus, Navbarin itemit -->
         <div class="nav-right">
             <a href="index.php" class="nav-link <?php if ($current_page == 'index.php') echo 'active'; ?>">Luokat</a>
-            <a href="reservations.php" class="nav-link">Varaukseni</a>
+            <a href="reservations.php" class="nav-link <?php if ($current_page == 'reservations.php') echo 'active'; ?>">Varaukseni</a>
             <a href="settings.php" class="nav-link <?php if ($current_page == 'settings.php') echo 'active'; ?>">Asetukset</a>
             <a href="logout.php" class="nav-link log-out">Kirjaudu ulos</a>
         </div>
