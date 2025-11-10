@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
 }
 ?>
 
-<!-- Lisätään flatpickr-kirjaston tyylit ja skriptit -->
+<!-- Lisätään flatpickr visuaalista kalenteria varten -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 

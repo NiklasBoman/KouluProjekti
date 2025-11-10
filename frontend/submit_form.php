@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         // Jos tallennus onnistuu, ohjataan onnistumissivulle TODO lisä onnistumisviesti vaikka toad illa
-        header('Location: index.php/reservations');
+        header('Location: reservations.php');
         exit;
     }
 }

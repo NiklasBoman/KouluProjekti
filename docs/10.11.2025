@@ -3,3 +3,4 @@
 - Tehty alustaavsti modal form mikä lähettää varauksen tietokantaan submit_form.php :lla / 
 index.php toiminnallisuudet on melkein vlamiit tyylittely pitäää vielä tehdä
 - Varaukset tallentuvat nyt tietokantaan
+- Reserve sivu modaalia vaille valmis paitsi tyyit
