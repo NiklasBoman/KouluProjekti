@@ -146,11 +146,13 @@ body {
     font-weight: 600;
 }
 
-.date-form input[type="date"] {
+/* Tyylit flatpickr-kalenterin syötekentälle */
+.date-form input[type="text"] {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
+    min-width: 220px; 
 }
 
 .date-form button {
@@ -201,7 +203,7 @@ h2.class-rooms-title {
 .room-item {
     background-color: #fff;
     padding: 1.5rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     transition: transform 0.2s ease;
 }
@@ -216,11 +218,16 @@ h2.class-rooms-title {
     padding: 0.6rem 1.2rem;
     text-decoration: none;
     border-radius: 4px;
+    border: none; 
+    cursor: pointer; 
 }
 
 .reserve-btn:hover {
     background-color: #0056b3;
 }
+
+/* Modal asetukset */
+
 
 /* Responsiivisuus mediaqueryt */
 @media (max-width: 1200px) {

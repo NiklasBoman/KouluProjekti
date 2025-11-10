@@ -1,1 +1,0 @@
-<!-- Käsittelee varauslomakkeen ja tallentaa sen tietokantaan -->
