@@ -71,11 +71,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php endif; ?>
     <label>Sähköposti</label>
     <br>
-    <input type="email" name="gmail" id="gmail" required>
+    <input type="email" name="gmail" id="gmail" placeholder="Syötä sähköpostiosoitteesi" required>
     <br>
     <label>Salasana</label>
     <br>
-    <input type="password" name="salasana" id="salasana" required>
+    <input type="password" name="salasana" id="salasana" placeholder="Syötä salasanasi" required>
     <br>
     <br>
     <button type="submit">Kirjaudu</button>
