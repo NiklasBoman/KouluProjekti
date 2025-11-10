@@ -3,4 +3,8 @@
 - Tehty alustaavsti modal form mikä lähettää varauksen tietokantaan submit_form.php :lla / 
 index.php toiminnallisuudet on melkein vlamiit tyylittely pitäää vielä tehdä
 - Varaukset tallentuvat nyt tietokantaan
-- Reserve sivu modaalia vaille valmis paitsi tyyit
+- Reserve sivun modaali lähes valmis ja poistaa tiedot oikeni tietokannasta
+- https://cdn.psdrepo.com/images/2x/panggon-com-meeting-room-booking-j4.jpg
+https://planyo-extras.s3-accelerate.amazonaws.com/website/img/planyo-landing-conference.jpg
+ index.php sivulle mallia tyylistä ja lisää tietokantaan vaikka 5 eri luokka tyyliä jotka käyttäjä möys filtteröi ennen hakua esim- musiikki ,teknologialuokka jnejneje
+- Käytä toastify ilmotuskiin 

@@ -57,15 +57,19 @@ $stmt->close();
                         <p>
                             <strong>Varattu ajalle:</strong>
                             <?php
-                                // Muotoillaan päivämäärät luettavampaan muotoon
-                                $alku = new DateTime($reservation['VarausAlku']);
-                                $loppu = new DateTime($reservation['VarausLoppu']);
-                                echo $alku->format('d.m.Y') . ' - ' . $loppu->format('d.m.Y');
+                            // Muotoillaan päivämäärät luettavampaan muotoon
+                            $alku = new DateTime($reservation['VarausAlku']);
+                            $loppu = new DateTime($reservation['VarausLoppu']);
+                            echo $alku->format('d.m.Y') . ' - ' . $loppu->format('d.m.Y');
                             ?>
                         </p>
-                        <!-- Lisätään peruuta-nappi, joka on visuaalisesti poistettu käytöstä (disabled) -->
-                         <!-- Lisää samanalainen mdaali kun indexissä -->
-                        <button class="delete-btn" data-reservation-id="<?php echo $reservation['VarausID']; ?>" disabled>Peruuta varaus</button>
+                        <!-- Nappi, joka avaa poiston vahvistusmodaalin -->
+                        <button type="button" class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteReservationModal"
+                            data-reservation-id="<?php echo $reservation['VarausID']; ?>"
+                            data-room-name="<?php echo htmlspecialchars($reservation['HuoneNimi']); ?>"
+                            data-date-range="<?php echo $alku->format('d.m.Y') . ' - ' . $loppu->format('d.m.Y'); ?>">
+                            Peruuta varaus
+                        </button>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -74,3 +78,43 @@ $stmt->close();
         </div>
     </div>
 </div>
+
+<!-- Varauksen poiston vahvistusmodaali -->
+<div class="modal fade" id="deleteReservationModal" tabindex="-1" aria-labelledby="deleteReservationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteReservationModalLabel">Vahvista varauksen poisto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>Oletko varma, että haluat poistaa tämän varauksen?</p>
+                <p><strong>Huone:</strong> <span id="modal-delete-room-name"></span></p>
+                <p><strong>Aikaväli:</strong> <span id="modal-delete-date-range"></span></p>
+                <p class="text-danger">Toimintoa ei voi perua.</p>
+
+                <!-- Piilotettu lomake, joka lähettää poistopyynnön -->
+                <form id="deleteReservationForm" action="delete_reservation.php" method="POST">
+                    <input type="hidden" name="reservation_id" id="modal-delete-reservation-id">
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Peruuta</button>
+                <button type="submit" form="deleteReservationForm" class="btn btn-danger">Vahvista poisto</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ladataan skriptit -->
+<script src="../public/assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+</html>

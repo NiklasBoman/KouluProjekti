@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 
+<div class="hero-section"></div>
 <div class="main-content">
     <!-- H1 otsikko -->
     <header class="header">
@@ -68,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
     <!-- Päivämäärän valinnan container -->
     <div class="content-section">
         <div class="date-selection">
-            
+
             <form action="index.php" method="post" class="date-form">
                 <!-- Visuaalinen kalenteri msitä valitaan aikaväli varaukselle -->
                 <div class="form-group">
@@ -135,11 +136,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
 <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+
+            <!-- Modal header -->
             <div class="modal-header">
                 <h5 class="modal-title" id="reservationModalLabel">Tarkasta varaus</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
+            <!-- Modal body -->
             <div class="modal-body">
                 <p>Olet varaamassa huonetta:</p>
                 <p><strong>Huone:</strong> <span id="modal-room-name"></span></p>
@@ -155,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
                 </form>
             </div>
 
-            <!-- Vahvista tai perruta varaus -->
+            <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Peruuta</button>
 
@@ -171,3 +175,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
 </body>
 
 </html>
+
+
+<!-- https://code-it-write-it.hashnode.dev/integrate-bootstrap-modal-popup-form-and-submit-data-to-email-and-mysql-database-in-php-using-ajax
+ MODAALIN dokumentit
+ 
+ TODO Lisää tietokantaan luokkia ja index sivulle minkätyyppisen luokan käyttäjä haluaa valita. 
+ Tee modalista tyylikäs ja lisää varausnappi index.php sivulle. Lisää myös varauksien hallintasivu frontend/reservations.php
+ Tee grid itemeistä vähän isommat ja tyylikkäämmäät mihin mahtuu kuva luokasta reunaan ja lisää häivytykset kuvaan
+
+ 
+ 
+ -->
