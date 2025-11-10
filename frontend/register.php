@@ -67,19 +67,19 @@ if (isset($_POST['rekisteroi'])) {
 <form action="" method="post">
     <label>Nimi</label>
     <br>
-    <input type="text" name="Nimi" id="Nimi">
+    <input type="text" name="Nimi" id="Nimi" placeholder="Syötä Nimesi">
     <br>
     <label>Sähköposti</label>
     <br>
-    <input type="email" name="Gmail" id="Gmail">
+    <input type="email" name="Gmail" id="Gmail" placeholder="Syötä sähköpostiosoitteesi">
     <br>
     <label>Puhelinnumero</label>
     <br>
-    <input type="number" name="PuhelinNro" id="PuhelinNro">
+    <input type="number" name="PuhelinNro" id="PuhelinNro" placeholder="Syötä PuhelinNro">
     <br>
     <label>Salasana</label>
     <br>
-    <input type="password" name="salasana" id="salasana">
+    <input type="password" name="salasana" id="salasana" placeholder="Syötä salasanasi">
     <br>
     <br>
     <button type="submit" name="rekisteroi">Rekisteröidy</button>
@@ -92,3 +92,4 @@ if (isset($_POST['rekisteroi'])) {
 </div>
 </body>
 </html>
+
