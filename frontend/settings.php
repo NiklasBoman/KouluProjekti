@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../sql/db.php';
+include '../includes/db_connect.php'; // Korjattu tietokantayhteys
 include "../includes/header_footer/header_frontend.php";
 
 ?>

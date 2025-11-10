@@ -1,5 +1,5 @@
 <?php
-include '../sql/db.php';
+include '../includes/db_connect.php'; // Korjattu käyttämään oikeaa tietokantayhteyttä
 
 if (isset($_POST['rekisteroi'])) {
     // Lomakkeen tiedot

@@ -33,6 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->fetch();
 
         if (password_verify($salasana, $hash)) {
+            // Luodaan uusi sessiotunniste turvallisuussyistä (estää session fixation)
+            // ja poistetaan vanha sessiotiedosto.
+            session_regenerate_id(true);
+
             $_SESSION['KayttajaID'] = $kayttajaID;
             $_SESSION['Nimi'] = $nimi;
             header("Location: index.php");

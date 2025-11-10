@@ -1,7 +1,10 @@
 # Julkinen .htaccess tiedosto
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /kouluvaraus/public/
+
+    # HUOM! Muuta tähänoma tiedostosi root kansio
+    # Sitten oikea osoite on http://localhost/OMA KANSIO POLKU/frontend/index.php
+    RewriteBase /KouluProjekti-3/public/
 
     # Estetään pääsy suoraan .env, .htaccess jne.
     RewriteRule ^(\.env|\.htaccess)$ - [F,L]
