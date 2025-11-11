@@ -322,6 +322,19 @@ h2.class-rooms-title {
     margin-top: 2rem;
 }
 
+/* Varaukset-sivun ryhmittely */
+.reservation-group {
+    margin-bottom: 3rem; /* Tilaa rakennusryhmien välille */
+}
+
+.reservation-group h2 {
+    font-size: 1.6rem;
+    color: #333;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
 /* Modal asetukset */
 
 
@@ -471,4 +484,3 @@ h2.class-rooms-title {
         justify-content: space-between;
     }
 }
-

@@ -95,9 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
         <div class="date-selection">
 
             <form action="index.php" method="post" class="date-form">
+
                 <!-- Visuaalinen kalenteri msitä valitaan aikaväli varaukselle -->
                 <div class="form-group">
-                    <label for="date-range-picker">Valitse aikaväli</label>
                     <input type="text" id="date-range-picker" placeholder="Valitse päivämäärät...">
                 </div>
 
@@ -107,7 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
 
                 <!-- Rakennuksen valinta -->
                 <div class="form-group">
-                    <label for="building-select">Valitse rakennus</label>
                     <select class="building-label" name="building" id="building-select">
                         <option value="" disabled <?php if (empty($building)) echo 'selected'; ?>>Valitse rakennus</option>
                         <?php foreach ($buildings as $b): ?>
@@ -139,9 +138,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
                 <?php if ($start_date && $end_date): ?>
                     <div class="selected-dates">
                         <p>Vapaat luokat ajalle: <?php echo date("d.m.Y", strtotime($start_date)); ?> - <?php echo date("d.m.Y", strtotime($end_date)); ?></p>
-                        <?php if ($building): ?>
-                            <p>Rakennus: <?php echo htmlspecialchars($building); ?></p>
-                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
 
@@ -154,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
                         ?>
                             <div class="room-item <?php echo $isHidden; ?>">
 
-                            <!-- Rakennuksen/ huoneen tunnus -->
+                                <!-- Rakennuksen/ huoneen tunnus -->
                                 <div class="room-details">
                                     <h3><?php echo htmlspecialchars($room['HuoneNimi']); ?></h3>
 
@@ -185,11 +181,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
                         endforeach;
                         ?>
                     </div>
+
+                    <!-- Rajoittaa huonekortit kuuteen ja lisää "näytä lisää" nappi joka lataa loputkin vapaat huoneet -->
                     <?php if (count($available_rooms) > 6): ?>
                         <div class="show-more-container">
                             <button id="show-more-btn" class="btn btn-secondary">Näytä lisää</button>
                         </div>
                     <?php endif; ?>
+
+                    <!-- Jos vapaita huoneita ei löydy ilmoitetaa nkäyttäjälle -->
                 <?php else: ?>
                     <div class="no-rooms-message">Ei vapaita huoneita tällä aikavälillä.</div>
                 <?php endif; ?>
