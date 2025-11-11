@@ -12,33 +12,52 @@ if (!isset($_SESSION['KayttajaID'])) {
 // Määritellään $kayttaja-muuttuja nimen näyttämistä varten
 $kayttaja = $_SESSION['Nimi'] ?? 'Käyttäjä';
 
+// Hae rakennukset tietokannasta dropdownia varten
+$buildings_result = $conn->query("SELECT DISTINCT Rakennus FROM Huoneet ORDER BY Rakennus");
+$buildings = [];
+if ($buildings_result) {
+    while ($row = $buildings_result->fetch_assoc()) {
+        $buildings[] = $row['Rakennus'];
+    }
+}
 // Käyttäjä valitsee päivämäärät ja haetaan vapaat huoneet näille päiville tietokannasta
 $start_date = '';
 $end_date = '';
 $available_rooms = [];
 $error_message = '';
+$building = '';
 
 // Nöytä vapaat huoneet, jos lomake on lähetetty
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isset($_POST['end_date'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isset($_POST['end_date']) && isset($_POST['building'])) {
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
+    $building = $_POST['building'] ?? ''; // Jos rakennus on valittu, tallennetaan se
 
     // Tarkistetaan, että päivämäärät ovat kelvollisia
     if ($start_date > $end_date) {
         $error_message = 'Tarkista valitut päivämäärät.';
+    } elseif (empty($building)) {
+        $error_message = 'Valitse rakennus.';
     } else {
-        // Hae kaikki huoneet
-        $all_rooms_result = $conn->query("SELECT HuoneID, HuoneNimi, Rakennus, Kerros, Paikat FROM Huoneet");
+        // Hae kaikki huoneet valitusta rakennuksesta
+        $stmt_all_rooms = $conn->prepare("SELECT HuoneID, HuoneNimi, Rakennus, Kerros, Paikat FROM Huoneet WHERE Rakennus = ?");
+        $stmt_all_rooms->bind_param("s", $building);
+
+        $stmt_all_rooms->execute();
+        $all_rooms_result = $stmt_all_rooms->get_result();
         $all_rooms = [];
         while ($row = $all_rooms_result->fetch_assoc()) {
             $all_rooms[$row['HuoneID']] = $row;
         }
+        $stmt_all_rooms->close();
 
-        // Hae varatut huoneet valitulle päivälle
+        // Hae varatut huoneet valitulta aikaväliltä ja rakennuksesta
         $stmt = $conn->prepare(
-            "SELECT DISTINCT HuoneID FROM Varaukset WHERE VarausAlku <= ? AND VarausLoppu >= ?"
+            "SELECT DISTINCT v.HuoneID FROM Varaukset v JOIN Huoneet h ON v.HuoneID = h.HuoneID WHERE v.VarausAlku <= ? AND v.VarausLoppu >= ? AND h.Rakennus = ?"
         );
-        $stmt->bind_param("ss", $end_date, $start_date);
+
+        $stmt->bind_param("sss", $end_date, $start_date, $building);
+
         $stmt->execute();
         $result = $stmt->get_result();
         $booked_room_ids = [];
@@ -47,11 +66,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
         }
         $stmt->close();
 
-        // Suodata pois varatut huoneet, jotta saadaan vapaat huoneet
+        // Suodatetaan pois varatut huoneet `all_rooms`-taulukosta, joka on jo mahdollisesti suodatettu rakennuksen mukaan.
         $available_rooms = array_diff_key($all_rooms, array_flip($booked_room_ids));
     }
 }
 ?>
+
+<!-- Rakennuksen valitseminen -->
 
 <!-- Lisätään flatpickr visuaalista kalenteria varten -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -73,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
             <form action="index.php" method="post" class="date-form">
                 <!-- Visuaalinen kalenteri msitä valitaan aikaväli varaukselle -->
                 <div class="form-group">
+                    <label for="date-range-picker">Valitse aikaväli</label>
                     <input type="text" id="date-range-picker" placeholder="Valitse päivämäärät...">
                 </div>
 
@@ -80,17 +102,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
                 <input type="hidden" name="start_date" id="start_date" value="<?php echo htmlspecialchars($start_date); ?>">
                 <input type="hidden" name="end_date" id="end_date" value="<?php echo htmlspecialchars($end_date); ?>">
 
+                <!-- Rakennuksen valinta -->
+                <div class="form-group">
+                    <label for="building-select">Valitse rakennus</label>
+                    <select name="building" id="building-select">
+                        <option value="" disabled <?php if (empty($building)) echo 'selected'; ?>>Valitse rakennus</option>
+                        <?php foreach ($buildings as $b): ?>
+                            <option value="<?php echo htmlspecialchars($b); ?>" <?php if ($building == $b) echo 'selected'; ?>>
+                                <?php echo htmlspecialchars($b); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
                 <!--  Hakee vapaat huoneet valitulle aikavälille-->
                 <div class="form-group">
                     <button type="submit">Hae vapaat huoneet</button>
                 </div>
             </form>
-
-            <?php if ($start_date && $end_date): ?>
-                <div class="selected-dates">
-                    <p>Valitut päivämäärät: <?php echo htmlspecialchars($start_date); ?> - <?php echo htmlspecialchars($end_date); ?></p>
-                </div>
-            <?php endif; ?>
 
             <?php if ($error_message): ?>
                 <div class="error-message"><?php echo $error_message; ?></div>
@@ -101,8 +130,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
     <!-- Vapaiden huoneiden tulosten container -->
     <div class="content-section">
         <section class="available-rooms">
-            <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($error_message)): ?>
-                <h2 class="class-rooms-title">Vapaat luokat:</h2>
+            <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($start_date) && !empty($end_date) && !empty($building) && empty($error_message)): ?>
+                
+                <?php if ($start_date && $end_date): ?>
+                <div class="selected-dates">
+                    <p>Vapaat luokat ajalle: <?php echo date("d.m.Y", strtotime($start_date)); ?> - <?php echo date("d.m.Y", strtotime($end_date)); ?></p>
+                    <?php if ($building): ?>
+                        <p>Rakennus: <?php echo htmlspecialchars($building); ?></p>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
 
                 <?php if (!empty($available_rooms)): ?>
                     <div class="rooms-list">
