@@ -40,13 +40,13 @@ $profiilikuva = $_SESSION['Profiilikuva'] ?? '../public/assets/images/profile_pl
         <label>Nimi</label>
         <input type="text">
         <div class="button2">
-        <button  id="svaihto">Salasanan vaihto</button>
+        <button  id="svaihto">Nimen vaihto</button>
         </div>
 
         <label>Sähköposti</label>
         <input type="email">
         <div class="button2">
-        <button  id="svaihto">Salasanan vaihto</button>
+        <button  id="svaihto">Sähköpostin vaihto</button>
         </div>
 
         <label>Salasana</label>
