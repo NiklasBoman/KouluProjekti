@@ -20,7 +20,8 @@ if ($buildings_result) {
         $buildings[] = $row['Rakennus'];
     }
 }
-// Käyttäjä valitsee päivämäärät ja haetaan vapaat huoneet näille päiville tietokannasta
+
+// Käyttäjä valitsee päivämäärät ja rakennuksen jonka jälkeen haetaan vapaat huoneet näille päiville tietokannasta
 $start_date = '';
 $end_date = '';
 $available_rooms = [];
@@ -31,7 +32,7 @@ $building = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isset($_POST['end_date']) && isset($_POST['building'])) {
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
-    $building = $_POST['building'] ?? ''; // Jos rakennus on valittu, tallennetaan se
+    $building = $_POST['building'] ?? '';
 
     // Tarkistetaan, että päivämäärät ovat kelvollisia
     if ($start_date > $end_date) {
@@ -39,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
     } elseif (empty($building)) {
         $error_message = 'Valitse rakennus.';
     } else {
+
         // Hae kaikki huoneet valitusta rakennuksesta
         $stmt_all_rooms = $conn->prepare("SELECT HuoneID, HuoneNimi, Rakennus, Kerros, Paikat FROM Huoneet WHERE Rakennus = ?");
         $stmt_all_rooms->bind_param("s", $building);
@@ -81,13 +83,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
 
 <div class="hero-section"></div>
 <div class="main-content">
+
     <!-- H1 otsikko -->
     <header class="header">
         <h1>Tervetuloa luokkavarauksiin, <?php echo htmlspecialchars($kayttaja); ?>!</h1>
         <p>Valitse haluamasi aikaväli ja varaa vapaa luokkahuone.</p>
     </header>
 
-    <!-- Päivämäärän valinnan container -->
+    <!-- Päivämäärän valinnainen container -->
     <div class="content-section">
         <div class="date-selection">
 
@@ -105,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
                 <!-- Rakennuksen valinta -->
                 <div class="form-group">
                     <label for="building-select">Valitse rakennus</label>
-                    <select name="building" id="building-select">
+                    <select class="building-label" name="building" id="building-select">
                         <option value="" disabled <?php if (empty($building)) echo 'selected'; ?>>Valitse rakennus</option>
                         <?php foreach ($buildings as $b): ?>
                             <option value="<?php echo htmlspecialchars($b); ?>" <?php if ($building == $b) echo 'selected'; ?>>
@@ -131,39 +134,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
     <div class="content-section">
         <section class="available-rooms">
             <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($start_date) && !empty($end_date) && !empty($building) && empty($error_message)): ?>
-                
+
+                <!-- Näytä käyttäjälle valitut päivämäärät sekä rakennus -->
                 <?php if ($start_date && $end_date): ?>
-                <div class="selected-dates">
-                    <p>Vapaat luokat ajalle: <?php echo date("d.m.Y", strtotime($start_date)); ?> - <?php echo date("d.m.Y", strtotime($end_date)); ?></p>
-                    <?php if ($building): ?>
-                        <p>Rakennus: <?php echo htmlspecialchars($building); ?></p>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
+                    <div class="selected-dates">
+                        <p>Vapaat luokat ajalle: <?php echo date("d.m.Y", strtotime($start_date)); ?> - <?php echo date("d.m.Y", strtotime($end_date)); ?></p>
+                        <?php if ($building): ?>
+                            <p>Rakennus: <?php echo htmlspecialchars($building); ?></p>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
 
                 <?php if (!empty($available_rooms)): ?>
                     <div class="rooms-list">
                         <?php foreach ($available_rooms as $room): ?>
                             <div class="room-item">
-                                <h3><?php echo htmlspecialchars($room['HuoneNimi']); ?></h3>
-                                <p><?php echo htmlspecialchars($room['Rakennus']); ?>, kerros <?php echo htmlspecialchars($room['Kerros']); ?></p>
-                                <p>Huoneen numero: <?php echo intval(substr($room['HuoneNimi'], -2)); ?></p>
-                                <p>Paikkoja: <?php echo htmlspecialchars($room['Paikat']); ?></p>
 
-                                <!-- Nappi avaa modaalin -->
-                                <button type="button" class="reserve-btn" data-bs-toggle="modal" data-bs-target="#reservationModal"
-                                    data-room-id="<?php echo $room['HuoneID']; ?>"
-                                    data-room-name="<?php echo htmlspecialchars($room['HuoneNimi']); ?>"
-                                    data-start-date="<?php echo htmlspecialchars($start_date); ?>"
-                                    data-end-date="<?php echo htmlspecialchars($end_date); ?>">
-                                    Varaa
-                                </button>
+                            <!-- Rakennuksen/ huoneen tunnus -->
+                                <div class="room-details">
+                                    <h3><?php echo htmlspecialchars($room['HuoneNimi']); ?></h3>
+
+                                    <!-- Rakennuksen kuva -->
+                                    <div class="room-image">
+                                        <img src="path/to/your/image.jpg" alt="Rakennuksen kuva"> <!-- Hae tietokannasta kyseisen rakennuksen kuva-->
+                                    </div>
+
+                                    <!-- Rakennuksen tiedot -->
+                                    <p><?php echo htmlspecialchars($room['Rakennus']); ?>, kerros <?php echo htmlspecialchars($room['Kerros']); ?></p>
+                                    <p>Huoneen numero: <?php echo intval(substr($room['HuoneNimi'], -2)); ?></p>
+                                    <p>Paikkoja: <?php echo htmlspecialchars($room['Paikat']); ?></p>
+                                </div>
+                                <div class="room-footer">
+
+                                    <!-- Nappi avaa modaalin -->
+                                    <button type="button" class="reserve-btn" data-bs-toggle="modal" data-bs-target="#reservationModal"
+                                        data-room-id="<?php echo $room['HuoneID']; ?>"
+                                        data-room-name="<?php echo htmlspecialchars($room['HuoneNimi']); ?>"
+                                        data-start-date="<?php echo htmlspecialchars($start_date); ?>"
+                                        data-end-date="<?php echo htmlspecialchars($end_date); ?>">
+                                        Varaa
+                                    </button>
+                                </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 <?php else: ?>
                     <div class="no-rooms-message">Ei vapaita huoneita tällä aikavälillä.</div>
                 <?php endif; ?>
+
             <?php endif; ?>
         </section>
     </div>
