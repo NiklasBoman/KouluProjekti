@@ -22,7 +22,7 @@ body {
 
 /* Hero-section asetukset */
 .hero-section {
-    height: 400px; 
+    height: 350px; 
     min-width: 900px; /* Muokkaa leveys responsiiviseksi ja sopivaksi ja korkeus myös */
     background-image: url('../images/hero_image.jpg'); 
     background-size: cover;
@@ -175,6 +175,7 @@ body {
 /* Saman korkeus kuin flatpickr-kalenterilla */
 .building-label {
     height: 43.2px; 
+    width: 182.55px;
     font-size: 1rem;
 }
 
@@ -238,7 +239,7 @@ h2.class-rooms-title {
     transition: transform 0.2s ease;
 }
 
-/* Hover efekti huone korteille */
+/* Hover efekti huone kort */
 .room-item:hover {
     transform: translateY(-5px);
 }
@@ -310,6 +311,17 @@ h2.class-rooms-title {
     background-color: #b30000;
 }
 
+/* Piilottaa huonekortit, joilla on tämä luokka */
+.room-item.room-hidden {
+    display: none;
+}
+
+/* "Näytä lisää" -napin containerin keskitys */
+.show-more-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
 /* Modal asetukset */
 
 
@@ -372,7 +384,7 @@ h2.class-rooms-title {
 
     /* Hero-kuvan koko ja teksti keskitetty */
     .hero-section {
-        height: 300px;
+        height: 200px;
         min-width: 100%;
         background-position: center;
     }

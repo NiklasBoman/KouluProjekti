@@ -90,4 +90,19 @@ document.addEventListener('DOMContentLoaded', function () {
             if (modalReservationIdInput) modalReservationIdInput.value = reservationId;
         });
     }
+
+    // "Näytä lisää" -napin toiminnallisuus (index.php)
+    const showMoreBtn = document.getElementById('show-more-btn');
+    if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', function() {
+            // Haetaan kaikki piilotetut huone-elementit
+            const hiddenRooms = document.querySelectorAll('.room-item.room-hidden');
+            
+            // Poistetaan piilotusluokka jokaiselta elementiltä
+            hiddenRooms.forEach(room => room.classList.remove('room-hidden'));
+
+            // Piilotetaan "Näytä lisää" -nappi, kun kaikki on näytetty
+            showMoreBtn.style.display = 'none';
+        });
+    }
 });

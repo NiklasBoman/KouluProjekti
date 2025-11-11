@@ -147,8 +147,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
 
                 <?php if (!empty($available_rooms)): ?>
                     <div class="rooms-list">
-                        <?php foreach ($available_rooms as $room): ?>
-                            <div class="room-item">
+                        <?php
+                        $counter = 0;
+                        foreach ($available_rooms as $room):
+                            $isHidden = ($counter >= 6) ? 'room-hidden' : '';
+                        ?>
+                            <div class="room-item <?php echo $isHidden; ?>">
 
                             <!-- Rakennuksen/ huoneen tunnus -->
                                 <div class="room-details">
@@ -176,8 +180,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
                                     </button>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
+                        <?php
+                            $counter++;
+                        endforeach;
+                        ?>
                     </div>
+                    <?php if (count($available_rooms) > 6): ?>
+                        <div class="show-more-container">
+                            <button id="show-more-btn" class="btn btn-secondary">Näytä lisää</button>
+                        </div>
+                    <?php endif; ?>
                 <?php else: ?>
                     <div class="no-rooms-message">Ei vapaita huoneita tällä aikavälillä.</div>
                 <?php endif; ?>
