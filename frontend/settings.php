@@ -12,6 +12,8 @@ if (!isset($_SESSION['KayttajaID'])) {
 
 // Määritellään $kayttaja-muuttuja nimen näyttämistä varten
 $kayttaja = $_SESSION['Nimi'] ?? 'Käyttäjä';
+$gmail = $_SESSION['Gmail'] ?? 'Gmail';
+
 
 $profiilikuva = $_SESSION['Profiilikuva'] ?? '../public/assets/images/profile_placeholder.svg';
 ?>
@@ -38,19 +40,19 @@ $profiilikuva = $_SESSION['Profiilikuva'] ?? '../public/assets/images/profile_pl
         </div>
         
         <label>Nimi</label>
-        <input type="text">
+        <input type="text" value= "<?php echo htmlspecialchars($kayttaja); ?>">
         <div class="button2">
-        <button  id="svaihto">Nimen vaihto</button>
+        <button  id="nvaihto">Nimen vaihto</button>
         </div>
 
         <label>Sähköposti</label>
-        <input type="email">
+        <input type="email" value="<?php echo htmlspecialchars($gmail); ?>" readonly>
         <div class="button2">
-        <button  id="svaihto">Sähköpostin vaihto</button>
+        <button  id="spvaihto">Sähköpostin vaihto</button>
         </div>
 
         <label>Salasana</label>
-        <input type="password">
+        <input type="password" value = "<?php echo htmlspecialchars($salasana); ?>" >
         <div class="button2">
         <button  id="svaihto">Salasanan vaihto</button>
         </div>
