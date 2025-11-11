@@ -116,7 +116,7 @@ button {
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 5, 10, 0.4);
   transition: background 0.3s, transform 0.2s;
-
+  width: 185px;
 }
 
 /* Button hover efekti */
