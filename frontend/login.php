@@ -41,8 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['Gmail'] = $gmail;
     $_SESSION['Profiilikuva'] = $profiilikuva;
     header("Location: index.php");
-    exit;
-            header("Location: index.php");
             exit;
         } else {
             $error = "❌ Väärä salasana.";  //Jos salasana väärin annetaan virhe.
