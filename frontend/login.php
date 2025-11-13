@@ -20,16 +20,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $salasana = $_POST['salasana'] ?? '';
 
     // Valmistellaan kysely
-    $stmt = $conn->prepare("SELECT KayttajaID, Nimi, SalasanaHash FROM Kayttajat WHERE Gmail = ?");
+    $stmt = $conn->prepare("SELECT KayttajaID, Nimi, Gmail, SalasanaHash FROM Kayttajat WHERE Gmail = ?");
     $stmt->bind_param("s", $gmail);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows == 1) {
         // Määritellään muuttujat ennen bind_result-kutsua
-        $kayttajaID = null; $nimi = null; $hash = null;
-
-        $stmt->bind_result($kayttajaID, $nimi, $hash);
+        $kayttajaID = null; $nimi = null; $hash = null; $gmail = null;
+        $stmt->bind_result($kayttajaID, $nimi, $gmail, $hash);
         $stmt->fetch();
 
         if (password_verify($salasana, $hash)) {
@@ -37,8 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // ja poistetaan vanha sessiotiedosto.
             session_regenerate_id(true);
 
-            $_SESSION['KayttajaID'] = $kayttajaID;
-            $_SESSION['Nimi'] = $nimi;
+    $_SESSION['KayttajaID'] = $kayttajaID;
+    $_SESSION['Nimi'] = $nimi;
+    $_SESSION['Gmail'] = $gmail;
+    header("Location: index.php");
+    exit;
             header("Location: index.php");
             exit;
         } else {
