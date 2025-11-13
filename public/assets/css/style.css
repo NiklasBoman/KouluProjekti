@@ -154,10 +154,9 @@ button:hover {
   gap: 0.5rem;
   align-self: flex-start;
 }
-.button2{
-  cursor: pointer;
+.button2 {
   align-self: flex-end;
-  margin-top: -45px;  
+  margin-top: 0.5rem;   
 }
 .settings-profile .profile-pic {
   width: 200px;
