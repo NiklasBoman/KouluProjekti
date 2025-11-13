@@ -30,6 +30,9 @@ SET time_zone = "+00:00";
 ALTER TABLE huoneet
 ADD COLUMN KuvaURL VARCHAR(255) AFTER Paikat;
 
+ALTER TABLE kayttajat
+ADD COLUMN Profiilikuva VARCHAR(255) AFTER PuhelinNro;
+
 --
 --
 -- --------------------------------------------------------
