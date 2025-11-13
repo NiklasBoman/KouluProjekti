@@ -136,10 +136,11 @@ button:hover {
   align-items: center;
   max-width: 850px;
   height: 100%;
-  max-height: 850px;
+  max-height: 880px;
   width: 100%;
   text-align: center;
   overflow: auto;
+
 } 
 .keskitin{
   height: 90vh;
