@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['svaihto'])) {
         $uusiSalasana = $_POST['salasana'];
         if (!empty($uusiSalasana)) {
-            $hash = password_hash($uusiSalasana, PASSWORD_BCRYPT);
+            $hash = password_hash($uusiSalasana, PASSWORD_DEFAULT);
             $stmt = $conn->prepare("UPDATE kayttajat SET SalasanaHash = ? WHERE KayttajaID = ?");
             $stmt->bind_param("si", $hash, $kayttajaID);
             $stmt->execute();
