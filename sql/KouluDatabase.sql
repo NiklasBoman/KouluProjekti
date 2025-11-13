@@ -22,6 +22,17 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+-- Lisätään kuva- URL tietookantaan jottai saadaan API:lla haettua kuvat luokille
+-- --------------------------------------------------------
+--
+--
+
+ALTER TABLE huoneet
+ADD COLUMN KuvaURL VARCHAR(255) AFTER Paikat;
+
+--
+--
+-- --------------------------------------------------------
 
 --
 -- Rakenne taululle `huoneet`

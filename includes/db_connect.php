@@ -12,4 +12,9 @@ if ($conn->connect_error) {
 
 // Asetetaan utf8mb4 charset
 $conn->set_charset("utf8mb4");
+
+// DEBUG: Jos tarvitset, voit lisätä virheilmoituksen, joka näkyy kehityksessä.
+if (APP_DEBUG) {
+    echo "Tietokantayhteys muodostettu onnistuneesti!";
+}
 ?>

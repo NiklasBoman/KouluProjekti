@@ -20,7 +20,7 @@ $reservations_by_building = [];
 
 // Valmistellaan SQL-lauseke, joka yhdistää Varaukset ja Huoneet -taulut
 $stmt = $conn->prepare(
-    "SELECT h.HuoneNimi, h.Rakennus, h.Kerros, v.VarausAlku, v.VarausLoppu, v.VarausID
+    "SELECT h.HuoneNimi, h.Rakennus, h.Kerros, h.Paikat, h.KuvaURL, v.VarausAlku, v.VarausLoppu, v.VarausID
      FROM Varaukset v
      JOIN Huoneet h ON v.HuoneID = h.HuoneID
      WHERE v.KayttajaID = ?
@@ -52,28 +52,38 @@ $stmt->close();
                     <h2><?php echo htmlspecialchars($building); ?></h2>
                     <div class="rooms-list">
                         <?php foreach ($reservations as $reservation): ?>
+                            <?php
+                                // Muotoillaan päivämäärät luettavampaan muotoon
+                                $alku = new DateTime($reservation['VarausAlku']);
+                                $loppu = new DateTime($reservation['VarausLoppu']);
+                                $date_range_formatted = $alku->format('d.m.Y') . ' - ' . $loppu->format('d.m.Y');
+                            ?>
                             <div class="room-item">
-                                <h3><?php echo htmlspecialchars($reservation['HuoneNimi']); ?></h3>
-                                <p>
-                                    <?php echo htmlspecialchars($reservation['Rakennus']); ?>,
-                                    kerros <?php echo htmlspecialchars($reservation['Kerros']); ?>
-                                </p>
-                                <p>
-                                    <strong>Varattu ajalle:</strong>
-                                    <?php
-                                    // Muotoillaan päivämäärät luettavampaan muotoon
-                                    $alku = new DateTime($reservation['VarausAlku']);
-                                    $loppu = new DateTime($reservation['VarausLoppu']);
-                                    echo $alku->format('d.m.Y') . ' - ' . $loppu->format('d.m.Y');
+                                <!-- Kuva ensin, kuten index.php:ssä -->
+                                <div class="room-image">
+                                    <?php 
+                                        $image_url = !empty($reservation['KuvaURL']) ? htmlspecialchars($reservation['KuvaURL']) : '../public/assets/images/room_placeholder.jpg';
                                     ?>
-                                </p>
-                                <!-- Nappi, joka avaa poiston vahvistusmodaalin -->
-                                <button type="button" class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteReservationModal"
-                                    data-reservation-id="<?php echo $reservation['VarausID']; ?>"
-                                    data-room-name="<?php echo htmlspecialchars($reservation['HuoneNimi']); ?>"
-                                    data-date-range="<?php echo $alku->format('d.m.Y') . ' - ' . $loppu->format('d.m.Y'); ?>">
-                                    Peruuta varaus
-                                </button>
+                                    <img src="<?php echo $image_url; ?>" alt="Kuva huoneesta <?php echo htmlspecialchars($reservation['HuoneNimi']); ?>">
+                                </div>
+                                
+                                <!-- Kortin sisältö: tiedot ja peruutuspainike -->
+                                <div class="room-content">
+                                    <div class="room-header">
+                                        <h3><?php echo htmlspecialchars($reservation['HuoneNimi']); ?></h3>
+                                        <p class="room-location"><?php echo htmlspecialchars($reservation['Rakennus']); ?>, krs. <?php echo htmlspecialchars($reservation['Kerros']); ?></p>
+                                    </div>
+                                    <div class="room-info">
+                                        <span><strong>Varattu:</strong> <?php echo $date_range_formatted; ?></span>
+                                    </div>
+                                    <!-- Nappi, joka avaa poiston vahvistusmodaalin -->
+                                    <button type="button" class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#deleteReservationModal"
+                                        data-reservation-id="<?php echo $reservation['VarausID']; ?>"
+                                        data-room-name="<?php echo htmlspecialchars($reservation['HuoneNimi']); ?>"
+                                        data-date-range="<?php echo $date_range_formatted; ?>">
+                                        Peruuta varaus
+                                    </button>
+                                </div>
                             </div>
                         <?php endforeach; ?>
                     </div>

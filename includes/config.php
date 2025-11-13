@@ -25,3 +25,12 @@ define('DB_NAME', $_ENV['DB_NAME'] ?? 'KouluDatabase');
 
 define('APP_ENV', $_ENV['APP_ENV'] ?? 'development');
 define('APP_DEBUG', filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN));
+
+
+// Virheenkäsittely debug-tilassa
+if (APP_ENV === 'development' && APP_DEBUG) {
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
+}
