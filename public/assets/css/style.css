@@ -3,7 +3,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #f8f9fa;
     color: #333;
-    background: linear-gradient(to left, rgb(63, 101, 224), white);
+    background-image: linear-gradient(rgba(235, 245, 255, 0.92), rgba(235, 245, 255, 0.92)), url('../images/concrete-texture.jpg');
 }
 
 /* Sticky Navbar */
