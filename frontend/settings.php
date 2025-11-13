@@ -80,9 +80,7 @@ $profiilikuva = $_SESSION['Profiilikuva'] ?? '../public/assets/images/profile_pl
             <img src="<?php echo htmlspecialchars($profiilikuva); ?>" 
                  alt="Profiilikuva" class="profile-pic">
                  <button  id="kvaihto">Vaihda kuva</button>
-        </div>
-        
-        <label>Nimi</label>
+</div>
 
     <label>Nimi</label>
     <form method="post" action="">
