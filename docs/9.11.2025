@@ -1,3 +1,4 @@
+9-11-2025
 - Muokattu kansiorakenne ja lisätty testidata tietokantaan.
 - Lisätty .gitignore, .env ja .env.example tiedostot
 - Siirretty tietokantaasetukset .env tiedostoon niin ne ei ole julkisesti saatavilla

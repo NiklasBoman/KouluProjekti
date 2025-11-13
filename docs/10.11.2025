@@ -1,3 +1,4 @@
+10-11-2025
 - Korjattu tietokantayhteys ja uusi testikäyttjä topi2@gmail.com salasana: 1234
 - Lisätty modaali pop up huoneen varausta tehdessä ja määritetty attribuutit ja haettu elementit
 - Tehty alustaavsti modal form mikä lähettää varauksen tietokantaan submit_form.php :lla / 
