@@ -46,7 +46,7 @@ $profiilikuva = $_SESSION['Profiilikuva'] ?? '../public/assets/images/profile_pl
         </div>
 
         <label>Sähköposti</label>
-        <input type="email" value="<?php echo htmlspecialchars($gmail); ?>" readonly>
+        <input type="email" value="<?php echo htmlspecialchars($gmail); ?>">
         <div class="button2">
         <button  id="spvaihto">Sähköpostin vaihto</button>
         </div>
