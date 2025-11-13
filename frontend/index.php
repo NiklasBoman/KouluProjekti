@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../includes/db_connect.php'; // Yhteys tietokantaan
+require_once '../includes/db_connect.php'; // Yhteys tietokantaan
 include "header_footer/header_frontend.php"; // Include header
 
 // Jos käyttäjä ei ole kirjautunut sisään, ohjataan kirjautumissivulle
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
     } else {
 
         // Hae kaikki huoneet valitusta rakennuksesta
-        $stmt_all_rooms = $conn->prepare("SELECT HuoneID, HuoneNimi, Rakennus, Kerros, Paikat FROM Huoneet WHERE Rakennus = ?");
+        $stmt_all_rooms = $conn->prepare("SELECT HuoneID, HuoneNimi, Rakennus, Kerros, Paikat, KuvaURL FROM Huoneet WHERE Rakennus = ?");
         $stmt_all_rooms->bind_param("s", $building);
 
         $stmt_all_rooms->execute();
@@ -149,23 +149,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['start_date']) && isse
                             $isHidden = ($counter >= 6) ? 'room-hidden' : '';
                         ?>
                             <div class="room-item <?php echo $isHidden; ?>">
-
-                                <!-- Rakennuksen/ huoneen tunnus -->
-                                <div class="room-details">
-                                    <h3><?php echo htmlspecialchars($room['HuoneNimi']); ?></h3>
-
-                                    <!-- Rakennuksen kuva -->
-                                    <div class="room-image">
-                                        <img src="path/to/your/image.jpg" alt="Rakennuksen kuva"> <!-- Hae tietokannasta kyseisen rakennuksen kuva-->
-                                    </div>
-
-                                    <!-- Rakennuksen tiedot -->
-                                    <p><?php echo htmlspecialchars($room['Rakennus']); ?>, kerros <?php echo htmlspecialchars($room['Kerros']); ?></p>
-                                    <p>Huoneen numero: <?php echo intval(substr($room['HuoneNimi'], -2)); ?></p>
-                                    <p>Paikkoja: <?php echo htmlspecialchars($room['Paikat']); ?></p>
+                                <!-- Kuva ensin, jotta se on helpompi sijoittaa -->
+                                <div class="room-image">
+                                    <?php 
+                                        // Käytetään huoneen omaa kuvaa, jos se on olemassa, muuten käytetään placeholder-kuvaa.
+                                        $image_url = !empty($room['KuvaURL']) ? htmlspecialchars($room['KuvaURL']) : '../public/assets/images/room_placeholder.jpg';
+                                    ?>
+                                    <img src="<?php echo $image_url; ?>" alt="Kuva huoneesta <?php echo htmlspecialchars($room['HuoneNimi']); ?>">
                                 </div>
-                                <div class="room-footer">
-
+                                
+                                <!-- Kortin sisältö: tiedot ja varausnappi -->
+                                <div class="room-content">
+                                    <div class="room-header">
+                                        <h3><?php echo htmlspecialchars($room['HuoneNimi']); ?></h3>
+                                        <p class="room-location"><?php echo htmlspecialchars($room['Rakennus']); ?>, krs. <?php echo htmlspecialchars($room['Kerros']); ?></p>
+                                    </div>
+                                    <div class="room-info">
+                                        <span>Paikkoja: <?php echo htmlspecialchars($room['Paikat']); ?></span>
+                                    </div>
                                     <!-- Nappi avaa modaalin -->
                                     <button type="button" class="reserve-btn" data-bs-toggle="modal" data-bs-target="#reservationModal"
                                         data-room-id="<?php echo $room['HuoneID']; ?>"
