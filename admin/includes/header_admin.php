@@ -41,7 +41,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <div class="nav-right">
             <a href="index.php" class="nav-link <?php if ($current_page == 'index.php') echo 'active'; ?>">Varaukset</a>
             <a href="admin_kayttajat.php" class="nav-link <?php if ($current_page == 'admin_kayttajat.php') echo 'active'; ?>">Käyttäjät</a>
-            <a href="logout.php" class="nav-link log-out">Kirjaudu ulos</a>
+            <a href="../frontend/logout.php" class="nav-link log-out">Kirjaudu ulos</a>
         </div>
     </nav>
 </header>
