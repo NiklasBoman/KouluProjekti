@@ -21,6 +21,25 @@ SET time_zone = "+00:00";
 -- Database: `kouludatabase`
 --
 
+
+-- --------------------------------------------------------
+-- Lisätään admin käyttäjä
+-- --------------------------------------------------------
+--
+--  Nyt käyttäjä ID=1 on admin käyttäjä
+
+-- Lisätään Rooli-sarake Kayttajat-tauluun
+ALTER TABLE `Kayttajat` ADD `Rooli` VARCHAR(50) NOT NULL DEFAULT 'user';
+
+-- Asetetaan yhdelle käyttäjälle admin-rooli testausta varten (vaihda ID tarvittaessa)
+UPDATE `Kayttajat` SET `Rooli` = 'admin' WHERE `KayttajaID` = 1;
+
+
+--
+--
+-- --------------------------------------------------------
+
+
 -- --------------------------------------------------------
 -- Lisätään kuva- URL tietookantaan jottai saadaan API:lla haettua kuvat luokille
 -- --------------------------------------------------------

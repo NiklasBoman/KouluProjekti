@@ -20,28 +20,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $salasana = $_POST['salasana'] ?? '';
 
     // Valmistellaan kysely
-    $stmt = $conn->prepare("SELECT KayttajaID, Nimi, Gmail, SalasanaHash FROM Kayttajat WHERE Gmail = ?");
+    // *** MUUTOS: Lisätään Rooli-sarakkeen haku ***
+    $stmt = $conn->prepare("SELECT KayttajaID, Nimi, SalasanaHash, Rooli FROM Kayttajat WHERE Gmail = ?");
     $stmt->bind_param("s", $gmail);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows == 1) {
         // Määritellään muuttujat ennen bind_result-kutsua
-        $kayttajaID = null; $nimi = null; $hash = null; $gmail = null;
-        $stmt->bind_result($kayttajaID, $nimi, $gmail, $hash);
+        $kayttajaID = null; $nimi = null; $hash = null; $rooli = null;
+
+        // *** MUUTOS: Sidotaan myös Rooli-muuttuja ***
+        $stmt->bind_result($kayttajaID, $nimi, $hash, $rooli);
         $stmt->fetch();
 
         if (password_verify($salasana, $hash)) {
             // Luodaan uusi sessiotunniste turvallisuussyistä (estää session fixation)
             // ja poistetaan vanha sessiotiedosto.
             session_regenerate_id(true);
+            
+            // *** MUUTOS: Tallennetaan rooli sessioon ja ohjataan oikealle sivulle ***
+            $_SESSION['KayttajaID'] = $kayttajaID;
+            $_SESSION['Nimi'] = $nimi;
+            $_SESSION['Rooli'] = $rooli; // Saadaan admin roolin tarkastus
 
-    $_SESSION['KayttajaID'] = $kayttajaID;
-    $_SESSION['Nimi'] = $nimi;
-    $_SESSION['Gmail'] = $gmail;
-    header("Location: index.php");
-    exit;
-            header("Location: index.php");
+            if ($rooli === 'admin') {
+                header("Location: ../admin/index.php"); // Ohjaa adminit admin-paneeliin
+            } else {
+                header("Location: index.php"); // Ohjaa muut käyttäjät normaalisti
+            }
             exit;
         } else {
             $error = "❌ Väärä salasana.";  //Jos salasana väärin annetaan virhe.
@@ -89,4 +96,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 </body>
 </html>
-

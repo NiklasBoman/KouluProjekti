@@ -6,7 +6,7 @@ Suorita skripti selaimessa {
 } Tätä varten .htaccess tiedosta täytää muuttaa 
 
 
------- Poista tämä osio .htaccess teidostossa siksi aikaa kun aat skriptin, lisää se sitten takaisin! ----------------
+------ Poista tämä osio .htaccess teidostossa siksi aikaa kun aat skriptin, LISÄÄ SE sitten takaisin!!!!! ----------------
 {
     <IfModule mod_rewrite.c>
     RewriteEngine On
@@ -20,3 +20,5 @@ Suorita skripti selaimessa {
 koska se estää suorat kutsut mmm. includes kansioon.
 - API -avain on tallenenttu .env tiedostoon joten se täytyy päivittää omaan Pexels API -avaimeen jos ahet projektin githubista.
 fetch..php tiedosto hakee API -avaimella kuvat ja tallentaa ne tietokantaan (url)
+
+- Lisätty toast ilmoitukset
