@@ -77,7 +77,7 @@ Huom! Muista poistaa seuraava osio .htaccess-tiedostosta väliaikaisesti, jotta 
 .env-tiedostossa määritellään myös tietokannan asetukset. Muokkaa tiedostoa ja lisää omat tietokannan yhteystietosi seuraavasti:
 
 DB_HOST=localhost
-DB_NAME=luokkavarausjärjestelma
+DB_NAME=kouludatabase
 DB_USER=root
 DB_PASS=salasana
 
