@@ -4,7 +4,7 @@ body {
   display: flex; /* Flexbox-asettelu mahdollistaa keskittämisen */
   justify-content: center; /* Keskittää sisällön vaakasuunnassa */
   align-items: center; /* Keskittää sisällön pystysuunnassa */
-  background: linear-gradient(to left, rgb(63, 101, 224), white); /* Liukuvärjätty tausta vasemmalta oikealle */
+ background-image: linear-gradient(rgba(235, 245, 255, 0.92), rgba(235, 245, 255, 0.92)), url('../images/concrete-texture.jpg'); /* Liukuvärjätty tausta vasemmalta oikealle */
   flex-direction: column; /* Elementit pinotaan pystysuunnassa */
 }
 

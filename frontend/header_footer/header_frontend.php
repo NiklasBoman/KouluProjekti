@@ -24,10 +24,16 @@ $current_page = basename($_SERVER['PHP_SELF']);
   <!-- Sticky Navbar, ei tarvitse olal sticky riippu sivun rakenteesta -->
     <nav class="navbar">
 
-        <!-- Vasen osuus, profiilikuva ja teksti -->
+<!-- Vasen osuus, profiilikuva ja teksti -->
         <div class="nav-left">
             <!-- TODO hae käyttäjän kuva tietokannasta ja aseta placeholderkuva -->
-            <img src="../public/assets/images/profile_placeholder.svg" alt="Kuva" class="profile-pic">
+            <?php
+            // Käytä sessiossa olevaa profiilikuvan polkua, jos asetettu; muuten placeholder
+            $profiilikuva = (isset($_SESSION['Profiilikuva']) && !empty($_SESSION['Profiilikuva']))
+                ? $_SESSION['Profiilikuva']
+                : "../public/assets/images/profile_placeholder.svg";
+            ?>
+            <img src="<?php echo htmlspecialchars($profiilikuva); ?>" alt="Kuva" class="profile-pic">
              <!-- Näyttää kirajutuneen käyttäjän nimen ja kuvan vasemmassa kulmassa navbaria-->
             <span class="user-name">Hei, <?php echo isset($_SESSION['Nimi']) ? htmlspecialchars($_SESSION['Nimi']) : 'Käyttäjä'; ?>!</span>
         </div>
@@ -49,5 +55,3 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 </body>
 </html>
-
-
