@@ -110,17 +110,12 @@ $profiilikuva = $_SESSION['Profiilikuva'] ?? '../public/assets/images/profile_pl
     <div class="settings-profile">
             <img src="<?php echo htmlspecialchars($profiilikuva); ?>" 
                  alt="Profiilikuva" class="profile-pic">
-<<<<<<< HEAD
-  <form method="post" action="" enctype="multipart/form-data" class="kuvalomake">
-=======
              <form method="post" action="" enctype="multipart/form-data">
     <br>
     <input type="file" name="profiilikuva" accept="image/*">
->>>>>>> b38f0fd9bed8b3a888ab906d62641b1cbcbc1224
     <div class="button2">
         <button type="submit" name="kvaihto">Vaihda kuva</button>
     </div>
-        <input type="file" name="profiilikuva" accept="image/*">
 </form>
 </div>
 
