@@ -22,3 +22,6 @@ koska se estää suorat kutsut mmm. includes kansioon.
 fetch..php tiedosto hakee API -avaimella kuvat ja tallentaa ne tietokantaan (url)
 
 - Lisätty toast ilmoitukset
+- Pieniä parannuksia tietoturvaan
+- Profiilikuvan vaihto onnistuu ja kuvat/email haetaan nyt sessioniin jotta käyttjä voi muuttaa niitä
+- Admin käyttäjä voi hallita käyttäjiä ja positaa/ lisätä niitä
