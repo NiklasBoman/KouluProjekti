@@ -1,1 +1,0 @@
-<!--  Apufunktiot millä tarkistetaan esim. onko luokkahuoneita vapaana valituille päiville -->
