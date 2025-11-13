@@ -52,9 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     // Profiilikuvan vaihto
-    if (isset($_POST['kvaihto']) && isset($_FILES['profiilikuva'])) {
+    if (isset($_POST['kvaihto']) && isset($_FILES['Profiilikuva'])) {
     $kayttajaID = $_SESSION['KayttajaID'];
-    $file = $_FILES['profiilikuva'];
+    $file = $_FILES['Profiilikuva'];
 
     // Tarkista ettei virheitä
     if ($file['error'] === UPLOAD_ERR_OK) {
@@ -107,17 +107,14 @@ $profiilikuva = $_SESSION['Profiilikuva'] ?? '../public/assets/images/profile_pl
 <div class="keskitin">
     <div class="container">
 <h1>Asetukset</h1>
-    <div class="settings-profile">
+    <form method="post" action="" enctype="multipart/form-data" class="settings-profile">
+        <div class="profile-image-container">
             <img src="<?php echo htmlspecialchars($profiilikuva); ?>" 
                  alt="Profiilikuva" class="profile-pic">
-    
-        <button type="submit" name="kvaihto">Vaihda kuva</button>
-                 <form method="post" action="" enctype="multipart/form-data">
-    <input type="file" name="profiilikuva" accept="image/*">
-    <div class="button2">
-    </div>
-</form>
-</div>
+            <input type="file" name="Profiilikuva" accept="image/*" class="form-control mt-2">
+        </div>
+        <button type="submit" name="kvaihto" class="btn btn-primary mt-2">Vaihda kuva</button>
+    </form>
 
     <label>Nimi</label>
     <form method="post" action="">
