@@ -3,6 +3,20 @@
 - Lisättä Pexels API -avain mikä ahakee random luokkahuonekuvat kaikille luokille
 Suorita skripti selaimessa {
     http://localhost/OMA_TIEDOSTO_POLKU/includes/fetch.php
-} Tätä varten .htaccess tiedosta täytää muuttaa koska se estää suorat kutsut mmm. includes kansioon.
+} Tätä varten .htaccess tiedosta täytää muuttaa 
+
+
+------ Poista tämä osio .htaccess teidostossa siksi aikaa kun aat skriptin, lisää se sitten takaisin! ----------------
+{
+    <IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule ^(includes|sql|vendor|config|\.env).* - [F,L]
+</IfModule>
+}
+
+----------------------------------------------------------------------------
+
+koska se estää suorat kutsut mmm. includes kansioon.
 - API -avain on tallenenttu .env tiedostoon joten se täytyy päivittää omaan Pexels API -avaimeen jos ahet projektin githubista.
 fetch..php tiedosto hakee API -avaimella kuvat ja tallentaa ne tietokantaan (url)
