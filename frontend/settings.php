@@ -51,6 +51,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->close();
         }
     }
+    // Profiilikuvan vaihto
+    if (isset($_POST['kvaihto']) && isset($_FILES['profiilikuva'])) {
+    $kayttajaID = $_SESSION['KayttajaID'];
+    $file = $_FILES['profiilikuva'];
+
+    // Tarkista ettei virheitä
+    if ($file['error'] === UPLOAD_ERR_OK) {
+        $targetDir = "../public/uploads/";
+        // Luo hakemisto jos ei ole
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+
+        // Luo uniikki tiedostonimi
+        $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $newName = "profile_" . $kayttajaID . "." . $ext;
+        $targetFile = $targetDir . $newName;
+
+        // Siirrä tiedosto
+        if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+            // Päivitä tietokantaan polku
+            $stmt = $conn->prepare("UPDATE kayttajat SET Profiilikuva = ? WHERE KayttajaID = ?");
+            $stmt->bind_param("si", $targetFile, $kayttajaID);
+            if ($stmt->execute()) {
+                $_SESSION['Profiilikuva'] = $targetFile;
+                $profiilikuva = $targetFile;
+            }
+            $stmt->close();
+        }
+    }
+}
 }
 
 // Määritellään $kayttaja-muuttuja nimen näyttämistä varten
@@ -79,7 +110,13 @@ $profiilikuva = $_SESSION['Profiilikuva'] ?? '../public/assets/images/profile_pl
     <div class="settings-profile">
             <img src="<?php echo htmlspecialchars($profiilikuva); ?>" 
                  alt="Profiilikuva" class="profile-pic">
-                 <button  id="kvaihto">Vaihda kuva</button>
+             <form method="post" action="" enctype="multipart/form-data">
+    <br>
+    <input type="file" name="profiilikuva" accept="image/*">
+    <div class="button2">
+        <button type="submit" name="kvaihto">Vaihda kuva</button>
+    </div>
+</form>
 </div>
 
     <label>Nimi</label>
