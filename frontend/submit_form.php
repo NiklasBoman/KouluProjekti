@@ -49,7 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("iiss", $huone_id, $kayttaja_id, $alku_pvm, $loppu_pvm);
 
     if ($stmt->execute()) {
-        // Jos tallennus onnistuu, ohjataan onnistumissivulle TODO lisä onnistumisviesti vaikka toad illa
+        // Jos tallennus onnistuu, asetetaan onnistumisviesti ja ohjataan varaukset-sivulle.
+        $_SESSION['success_message'] = "Varaus luotu onnistuneesti!";
         header('Location: reservations.php');
         exit;
     }

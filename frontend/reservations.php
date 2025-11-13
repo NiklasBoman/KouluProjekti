@@ -38,6 +38,25 @@ $stmt->close();
 ?>
 
 <div class="main-content">
+    <!-- Toast-ilmoituksen container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <?php if (isset($_SESSION['success_message'])): ?>
+            <div id="notificationToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <?php 
+                            echo htmlspecialchars($_SESSION['success_message']); 
+                            // Poistetaan viesti sessionista, jotta se ei näy uudelleen sivun päivityksen jälkeen
+                            unset($_SESSION['success_message']);
+                        ?>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+
+
     <!-- H1 otsikko -->
     <header class="header">
         <h1>Omat varauksesi, <?php echo htmlspecialchars($kayttaja); ?>!</h1>

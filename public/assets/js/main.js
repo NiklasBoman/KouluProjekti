@@ -105,4 +105,14 @@ document.addEventListener('DOMContentLoaded', function () {
             showMoreBtn.style.display = 'none';
         });
     }
+
+    // Toast-ilmoituksen näyttäminen (reservations.php)
+    const notificationToastEl = document.getElementById('notificationToast');
+    if (notificationToastEl) {
+        // Luodaan Bootstrap Toast -instanssi
+        const notificationToast = new bootstrap.Toast(notificationToastEl, {
+            delay: 7000 // Ilmoitus piilotetaan 7 sekunnin kuluttua
+        });
+        notificationToast.show(); // Näytetään ilmoitus
+    }
 });
