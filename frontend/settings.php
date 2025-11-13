@@ -9,6 +9,49 @@ if (!isset($_SESSION['KayttajaID'])) {
     header('Location: login.php');
     exit;
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $kayttajaID = $_SESSION['KayttajaID'];
+
+    // Nimen vaihto
+    if (isset($_POST['nvaihto'])) {
+        $uusiNimi = trim($_POST['nimi']);
+        if (!empty($uusiNimi)) {
+            $stmt = $conn->prepare("UPDATE kayttajat SET Nimi = ? WHERE KayttajaID = ?");
+            $stmt->bind_param("si", $uusiNimi, $kayttajaID);
+            if ($stmt->execute()) {
+                $_SESSION['Nimi'] = $uusiNimi; // Päivitetään myös sessio
+                $kayttaja = $uusiNimi;
+            }
+            $stmt->close();
+        }
+    }
+
+    // Sähköpostin vaihto
+    if (isset($_POST['spvaihto'])) {
+        $uusiEmail = trim($_POST['gmail']);
+        if (filter_var($uusiEmail, FILTER_VALIDATE_EMAIL)) {
+            $stmt = $conn->prepare("UPDATE kayttajat SET Gmail = ? WHERE KayttajaID = ?");
+            $stmt->bind_param("si", $uusiEmail, $kayttajaID);
+            if ($stmt->execute()) {
+                $_SESSION['Gmail'] = $uusiEmail;
+                $gmail = $uusiEmail;
+            }
+            $stmt->close();
+        }
+    }
+
+    // Salasanan vaihto
+    if (isset($_POST['svaihto'])) {
+        $uusiSalasana = $_POST['salasana'];
+        if (!empty($uusiSalasana)) {
+            $hash = password_hash($uusiSalasana, PASSWORD_BCRYPT);
+            $stmt = $conn->prepare("UPDATE kayttajat SET SalasanaHash = ? WHERE KayttajaID = ?");
+            $stmt->bind_param("si", $hash, $kayttajaID);
+            $stmt->execute();
+            $stmt->close();
+        }
+    }
+}
 
 // Määritellään $kayttaja-muuttuja nimen näyttämistä varten
 $kayttaja = $_SESSION['Nimi'] ?? 'Käyttäjä';
@@ -40,22 +83,30 @@ $profiilikuva = $_SESSION['Profiilikuva'] ?? '../public/assets/images/profile_pl
         </div>
         
         <label>Nimi</label>
-        <input type="text" value= "<?php echo htmlspecialchars($kayttaja); ?>">
-        <div class="button2">
-        <button  id="nvaihto">Nimen vaihto</button>
-        </div>
+
+    <label>Nimi</label>
+    <form method="post" action="">
+    <input type="text" name="nimi" value="<?php echo htmlspecialchars($kayttaja); ?>">
+    <div class="button2">
+        <button type="submit" name="nvaihto">Nimen vaihto</button>
+    </div>
+</form>
 
         <label>Sähköposti</label>
-        <input type="email" value="<?php echo htmlspecialchars($gmail); ?>" >
+    <form method="post" action="">
+        <input type="email" name = "gmail" value="<?php echo htmlspecialchars($gmail); ?>">
         <div class="button2">
-        <button  id="spvaihto">Sähköpostin vaihto</button>
+        <button type="submit" name="spvaihto">Sähköpostin vaihto</button>
         </div>
+    </form>
 
         <label>Salasana</label>
-        <input type="password" value = "<?php echo htmlspecialchars($salasana); ?>" >
+    <form method="post" action="">
+        <input type="password" name="salasana" placeholder ="********" >
         <div class="button2">
-        <button  id="svaihto">Salasanan vaihto</button>
+        <button type="submit" name="svaihto">Salasanan vaihto</button>
         </div>
+    </form>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
