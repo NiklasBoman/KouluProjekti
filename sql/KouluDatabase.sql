@@ -238,7 +238,8 @@ CREATE TABLE `kayttajat` (
   `Gmail` varchar(100) NOT NULL,
   `SalasanaHash` varchar(255) NOT NULL,
   `PuhelinNro` varchar(20) DEFAULT NULL,
-  `Rooli` varchar(50) NOT NULL DEFAULT 'user'
+  `Rooli` varchar(50) NOT NULL DEFAULT 'user',
+  `Profiilikuva` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -334,8 +335,7 @@ ALTER TABLE `varaukset`
   ADD CONSTRAINT `varaukset_ibfk_2` FOREIGN KEY (`HuoneID`) REFERENCES `huoneet` (`HuoneID`) ON DELETE CASCADE;
 COMMIT;
 
-ALTER TABLE kayttajat
-ADD COLUMN Profiilikuva VARCHAR(255) AFTER PuhelinNro;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
