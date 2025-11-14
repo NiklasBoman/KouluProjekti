@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Rakenne taululle `huoneet`
 --
 
-CREATE TABLE `huoneet` (
+CREATE TABLE `Huoneet` (
   `HuoneID` int(11) NOT NULL,
   `HuoneNimi` varchar(50) NOT NULL,
   `Rakennus` varchar(50) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `huoneet` (
 -- Vedos taulusta `huoneet`
 --
 
-INSERT INTO `huoneet` (`HuoneID`, `HuoneNimi`, `Rakennus`, `Kerros`, `Paikat`, `KuvaURL`) VALUES
+INSERT INTO `Huoneet` (`HuoneID`, `HuoneNimi`, `Rakennus`, `Kerros`, `Paikat`, `KuvaURL`) VALUES
 (1, 'A101', 'Päärakennus', 1, 25, 'https://images.pexels.com/photos/8423429/pexels-photo-8423429.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
 (2, 'A102', 'Päärakennus', 1, 30, 'https://images.pexels.com/photos/8473000/pexels-photo-8473000.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
 (3, 'B201', 'Teknologiatalo', 2, 20, 'https://images.pexels.com/photos/8382220/pexels-photo-8382220.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'),
@@ -232,7 +232,7 @@ INSERT INTO `huoneet` (`HuoneID`, `HuoneNimi`, `Rakennus`, `Kerros`, `Paikat`, `
 -- Rakenne taululle `kayttajat`
 --
 
-CREATE TABLE `kayttajat` (
+CREATE TABLE `Kayttajat` (
   `KayttajaID` int(11) NOT NULL,
   `Nimi` varchar(50) NOT NULL,
   `Gmail` varchar(100) NOT NULL,
@@ -246,7 +246,7 @@ CREATE TABLE `kayttajat` (
 -- Vedos taulusta `kayttajat`
 --
 
-INSERT INTO `kayttajat` (`KayttajaID`, `Nimi`, `Gmail`, `SalasanaHash`, `PuhelinNro`, `Rooli`) VALUES
+INSERT INTO `Kayttajat` (`KayttajaID`, `Nimi`, `Gmail`, `SalasanaHash`, `PuhelinNro`, `Rooli`) VALUES
 (1, 'Admin', 'admin@admin.com', '$2y$10$ehDKc6h6WDD.140sSTS8yuMeA5YQ.ki4Za2ok7.u76d2Kapa4tdbe', '0501855677', 'admin'),
 (2, 'topi2', 'topi2@gmail.com', '$2y$10$tL6xJZphXPrTuZQgR4P5e.L.WX3hWW.2Q5hefbvAl8MhtKJpg63JW', '0402733844', 'user');
 
@@ -256,7 +256,7 @@ INSERT INTO `kayttajat` (`KayttajaID`, `Nimi`, `Gmail`, `SalasanaHash`, `Puhelin
 -- Rakenne taululle `varaukset`
 --
 
-CREATE TABLE `varaukset` (
+CREATE TABLE `Varaukset` (
   `VarausID` int(11) NOT NULL,
   `KayttajaID` int(11) NOT NULL,
   `HuoneID` int(11) NOT NULL,
@@ -269,7 +269,7 @@ CREATE TABLE `varaukset` (
 -- Vedos taulusta `varaukset`
 --
 
-INSERT INTO `varaukset` (`VarausID`, `KayttajaID`, `HuoneID`, `VarausAlku`, `VarausLoppu`, `VarausStatus`) VALUES
+INSERT INTO `Varaukset` (`VarausID`, `KayttajaID`, `HuoneID`, `VarausAlku`, `VarausLoppu`, `VarausStatus`) VALUES
 (1, 2, 3, '2025-11-03 00:00:00', '2025-11-12 00:00:00', 'varattu'),
 (3, 2, 2, '2025-11-11 00:00:00', '2025-11-12 00:00:00', 'varattu'),
 (5, 2, 165, '2025-11-11 00:00:00', '2025-11-13 00:00:00', 'varattu'),
@@ -283,20 +283,20 @@ INSERT INTO `varaukset` (`VarausID`, `KayttajaID`, `HuoneID`, `VarausAlku`, `Var
 --
 -- Indexes for table `huoneet`
 --
-ALTER TABLE `huoneet`
+ALTER TABLE `Huoneet`
   ADD PRIMARY KEY (`HuoneID`);
 
 --
 -- Indexes for table `kayttajat`
 --
-ALTER TABLE `kayttajat`
+ALTER TABLE `Kayttajat`
   ADD PRIMARY KEY (`KayttajaID`),
   ADD UNIQUE KEY `Gmail` (`Gmail`);
 
 --
 -- Indexes for table `varaukset`
 --
-ALTER TABLE `varaukset`
+ALTER TABLE `Varaukset`
   ADD PRIMARY KEY (`VarausID`),
   ADD KEY `KayttajaID` (`KayttajaID`),
   ADD KEY `HuoneID` (`HuoneID`);
@@ -308,19 +308,19 @@ ALTER TABLE `varaukset`
 --
 -- AUTO_INCREMENT for table `huoneet`
 --
-ALTER TABLE `huoneet`
+ALTER TABLE `Huoneet`
   MODIFY `HuoneID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 
 --
 -- AUTO_INCREMENT for table `kayttajat`
 --
-ALTER TABLE `kayttajat`
+ALTER TABLE `Kayttajat`
   MODIFY `KayttajaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `varaukset`
 --
-ALTER TABLE `varaukset`
+ALTER TABLE `Varaukset`
   MODIFY `VarausID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
@@ -330,9 +330,9 @@ ALTER TABLE `varaukset`
 --
 -- Rajoitteet taululle `varaukset`
 --
-ALTER TABLE `varaukset`
-  ADD CONSTRAINT `varaukset_ibfk_1` FOREIGN KEY (`KayttajaID`) REFERENCES `kayttajat` (`KayttajaID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `varaukset_ibfk_2` FOREIGN KEY (`HuoneID`) REFERENCES `huoneet` (`HuoneID`) ON DELETE CASCADE;
+ALTER TABLE `Varaukset`
+  ADD CONSTRAINT `varaukset_ibfk_1` FOREIGN KEY (`KayttajaID`) REFERENCES `Kayttajat` (`KayttajaID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `varaukset_ibfk_2` FOREIGN KEY (`HuoneID`) REFERENCES `Huoneet` (`HuoneID`) ON DELETE CASCADE;
 COMMIT;
 
 
