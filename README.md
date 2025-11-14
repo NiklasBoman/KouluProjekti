@@ -33,7 +33,7 @@ Admin-paneelin kautta ylläpitäjä voi hallita käyttäjiä ja varauksia helpos
 
 4. Luo tietokanta MySQL:ssä ja tuo tietokannan rakenne:
 
-5. Luo tietokanta nimeltä luokkavarausjärjestelma (tai haluamasi nimi).
+5. Luo tietokanta nimeltä kouludatabase (tai haluamasi nimi).
 
 6. Käytä mukana olevaa SQL-tiedostoa tietokannan luomiseksi.
 
