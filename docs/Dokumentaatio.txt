@@ -12,7 +12,7 @@ Admin-paneeli ylläpitäjälle.
 
 
 2. Päätökset ja tekniset valinnat
-Frontend (HTML/CSS/JS): Selkeä, kevyt ja laajasti tuettu selainpohjainen toteutus. Responsiivisuus toteutetaan CSS:llä ja bootstrapilla. 
+Frontend (HTML/CSS/JS): Selkeä, kevty ja laajasti tuettu selainpohjainen toteutus. Responsiivisuus toteutetaan CSS:llä ja bootstrapilla. 
 
 Backend (PHP): Valittu helpon web-integraation, laajan hosting-tuen ja nopean kehityksen vuoksi
 
